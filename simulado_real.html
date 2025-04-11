@@ -3,11 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Simulado Real Aleatório</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <style>
-      * {
-          box-sizing: border-box;
-      }
-
       body {
           font-family: "Segoe UI", sans-serif;
           background: linear-gradient(to right, #f2f9ff, #e3ecf7);
@@ -24,31 +21,37 @@
           padding: 25px;
           border-radius: 12px;
           box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
-          transition: all 0.3s ease;
       }
 
       h1 {
-          margin-bottom: 20px;
+          margin-bottom: 10px;
           color: #2c3e50;
+      }
+
+      p.instrucao {
+          font-size: 0.95rem;
+          color: #555;
+          margin-top: -10px;
+          margin-bottom: 20px;
       }
 
       input[type="file"] {
           display: none;
       }
 
-      #fileLabel {
+      #fileLabelZip, #fileLabelJson {
           display: inline-block;
+          margin: 10px;
+          padding: 12px 24px;
           background-color: #3498db;
           color: white;
-          padding: 12px 25px;
           border-radius: 8px;
           cursor: pointer;
-          margin-bottom: 20px;
           font-weight: 600;
           transition: background-color 0.3s ease;
       }
 
-      #fileLabel:hover {
+      #fileLabelZip:hover, #fileLabelJson:hover {
           background-color: #2980b9;
       }
 
@@ -62,7 +65,6 @@
           color: #1e2d40;
           font-weight: 500;
           cursor: pointer;
-          transition: all 0.3s ease;
           text-align: left;
       }
 
@@ -137,7 +139,7 @@
               font-size: 0.95rem;
           }
 
-          button, #fileLabel {
+          button, #fileLabelZip, #fileLabelJson {
               width: 100%;
               font-size: 1rem;
           }
@@ -146,20 +148,23 @@
 </head>
 <body>
 <h1>Simulado Real Aleatório</h1>
-<p>Selecione uma pasta contendo arquivos .json</p>
-<label id="fileLabel" for="inputJsons">📁 Selecionar pasta com JSONs</label>
-<input type="file" id="inputJsons" accept=".json" webkitdirectory multiple>
+<p class="instrucao">📁 Escolha como deseja carregar as questões:</p>
+<label id="fileLabelJson" for="inputJson">Arquivos JSON (pasta)</label>
+<input type="file" id="inputJson" accept=".json" webkitdirectory multiple>
+<label id="fileLabelZip" for="inputZip">Arquivo ZIP</label>
+<input type="file" id="inputZip" accept=".zip">
 <div id="timer">Tempo restante: 60:00</div>
 <div class="barra-progresso">
   <div id="barraInterna" class="barra-progresso-interna"></div>
 </div>
-<div id="container"></div>
-
+<div id="container">
+  <p>O simulado será carregado automaticamente após a escolha.</p>
+</div>
 <audio id="audioCorreto" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"></audio>
 <audio id="audioErro" src="https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg"></audio>
-
 <script>
-	const input = document.getElementById("inputJsons");
+	const inputJson = document.getElementById("inputJson");
+	const inputZip = document.getElementById("inputZip");
 	const container = document.getElementById("container");
 	const timerEl = document.getElementById("timer");
 	const barra = document.getElementById("barraInterna");
@@ -172,17 +177,10 @@
 	let tempoRestante = 60 * 60;
 	let intervalo;
 
-	input.addEventListener("change", async (event) => {
-		const arquivos = Array.from(event.target.files)
-			.filter(f => f.name.endsWith(".json"))
-			.sort(() => 0.5 - Math.random())
-			.slice(0, 10);
-
+	inputJson.addEventListener("change", async (event) => {
+		const arquivos = Array.from(event.target.files).filter(f => f.name.endsWith(".json"));
 		questoes = [];
-		acertos = 0;
-		questaoAtual = 0;
-
-		for (const arq of arquivos) {
+		for (const arq of arquivos.sort(() => 0.5 - Math.random()).slice(0, 10)) {
 			const texto = await arq.text();
 			const json = JSON.parse(texto);
 			const qs = json.content.questions;
@@ -190,10 +188,33 @@
 			aleatoria._arquivo = arq.name;
 			questoes.push(aleatoria);
 		}
+		iniciarSimulado();
+	});
 
+	inputZip.addEventListener("change", async (event) => {
+		const zipFile = event.target.files[0];
+		const zip = await JSZip.loadAsync(zipFile);
+		questoes = [];
+		for (const nome of Object.keys(zip.files)) {
+			if (nome.endsWith(".json")) {
+				const conteudo = await zip.files[nome].async("string");
+				const json = JSON.parse(conteudo);
+				const qs = json.content.questions;
+				const aleatoria = qs[Math.floor(Math.random() * qs.length)];
+				aleatoria._arquivo = nome;
+				questoes.push(aleatoria);
+			}
+		}
+		questoes = questoes.sort(() => 0.5 - Math.random()).slice(0, 10);
+		iniciarSimulado();
+	});
+
+	function iniciarSimulado() {
+		acertos = 0;
+		questaoAtual = 0;
 		iniciarCronometro();
 		renderizarQuestao();
-	});
+	}
 
 	function iniciarCronometro() {
 		clearInterval(intervalo);
@@ -223,12 +244,11 @@
 		}
 
 		atualizarBarra();
-
 		const q = questoes[questaoAtual];
 		container.innerHTML = `
-			<h3 style="text-align: left">${questaoAtual + 1}) ${q.enunciated}</h3>
-			<p style="text-align: left"><em>Arquivo: ${q._arquivo}</em></p>
-		`;
+      <h3 style="text-align: left">${questaoAtual + 1}) ${q.enunciated}</h3>
+      <p style="text-align: left"><em>Arquivo: ${q._arquivo}</em></p>
+    `;
 
 		q.options.forEach(op => {
 			const btn = document.createElement("button");
@@ -245,7 +265,7 @@
 					audioCorreto.play();
 					acertos++;
 				} else {
-					feedback.innerHTML = "❌ Incorreto. A correta era:" + correta.text;
+					feedback.innerHTML = "❌ Incorreto. A correta era: " + correta.text;
 					feedback.className = "incorreta";
 					audioErro.play();
 				}
@@ -273,10 +293,10 @@
 	function mostrarResultado(msg) {
 		barra.style.width = "100%";
 		container.innerHTML = `
-			<h2>${msg}</h2>
-			<p>Você acertou <strong>${acertos}</strong> de <strong>${questoes.length}</strong> questões.</p>
-			<button onclick="window.location.reload()">🔁 Refazer simulado</button>
-		`;
+      <h2>${msg}</h2>
+      <p>Você acertou <strong>${acertos}</strong> de <strong>${questoes.length}</strong> questões.</p>
+      <button onclick="window.location.reload()">🔁 Refazer simulado</button>
+    `;
 	}
 </script>
 </body>

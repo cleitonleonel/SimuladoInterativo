@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Simulado Interativo Geral</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <style>
       * {
           box-sizing: border-box;
@@ -14,6 +15,7 @@
           padding: 30px 15px;
           color: #2c3e50;
           margin: 0;
+          text-align: center;
       }
 
       h1, h2, h3 {
@@ -72,11 +74,12 @@
           padding: 12px 24px;
           border: none;
           border-radius: 6px;
-          margin-top: 20px;
+          margin: 20px auto 0;
           font-weight: 600;
           font-size: 1rem;
           cursor: pointer;
           transition: background-color 0.3s ease;
+          display: block;
       }
 
       button:hover {
@@ -87,21 +90,19 @@
           display: none;
       }
 
-      #fileLabel {
-          display: block;
-          width: fit-content;
-          margin: 20px auto;
+      #fileLabelZip, #fileLabelJson {
+          display: inline-block;
+          margin: 10px;
+          padding: 12px 24px;
           background-color: #3498db;
           color: white;
-          padding: 12px 24px;
           border-radius: 8px;
           cursor: pointer;
           font-weight: 600;
           transition: background-color 0.3s ease;
       }
 
-
-      #fileLabel:hover {
+      #fileLabelZip:hover, #fileLabelJson:hover {
           background-color: #2980b9;
       }
 
@@ -138,6 +139,7 @@
           padding: 15px;
           border-radius: 10px;
           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+          text-align: center;
       }
 
       ul {
@@ -169,10 +171,6 @@
           text-align: center;
       }
 
-      .result-arquivo {
-          text-align: center;
-      }
-
       @media (max-width: 600px) {
           #container {
               padding: 20px 15px;
@@ -182,7 +180,7 @@
               font-size: 0.95rem;
           }
 
-          button, #fileLabel {
+          button, #fileLabelZip, #fileLabelJson {
               width: 100%;
               font-size: 1rem;
           }
@@ -200,8 +198,11 @@
 </head>
 <body>
 <h1>Simulado Interativo Geral</h1>
-<label id="fileLabel" for="inputJsons">📁 Selecionar pasta com JSONs</label>
-<input type="file" id="inputJsons" accept=".json" webkitdirectory multiple>
+<p>Selecione o tipo de arquivo para iniciar:</p>
+<label id="fileLabelJson" for="inputJson">📁 Usar arquivos .json</label>
+<input type="file" id="inputJson" accept=".json" webkitdirectory multiple>
+<label id="fileLabelZip" for="inputZip">🗜️ Usar arquivo .zip</label>
+<input type="file" id="inputZip" accept=".zip">
 <div id="progresso">
   <label>Progresso:</label>
   <div class="barra">
@@ -209,15 +210,14 @@
   </div>
 </div>
 <div id="container">
-  <p>Selecione uma pasta contendo arquivos .json para iniciar o simulado.</p>
+  <p>Após escolher o tipo de arquivo, o simulado será iniciado automaticamente.</p>
 </div>
 <div id="resultado"></div>
-
 <audio id="audioCorreto" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"></audio>
 <audio id="audioErro" src="https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg"></audio>
-
 <script>
-	const input = document.getElementById("inputJsons");
+	const inputJson = document.getElementById("inputJson");
+	const inputZip = document.getElementById("inputZip");
 	const container = document.getElementById("container");
 	const resultado = document.getElementById("resultado");
 	const barra = document.getElementById("barra-progresso");
@@ -233,8 +233,28 @@
 	let tempos = [];
 	let resultadosPorArquivo = [];
 
-	input.addEventListener("change", (event) => {
+	inputJson.addEventListener("change", async (event) => {
 		arquivos = Array.from(event.target.files).filter(f => f.name.endsWith(".json")).sort((a, b) => a.name.localeCompare(b.name));
+		iniciarSimulado();
+	});
+
+	inputZip.addEventListener("change", async (event) => {
+		const zipFile = event.target.files[0];
+		const zip = await JSZip.loadAsync(zipFile);
+		arquivos = [];
+
+		for (const nome of Object.keys(zip.files)) {
+			if (nome.endsWith(".json")) {
+				const conteudo = await zip.files[nome].async("string");
+				const blob = new Blob([conteudo], {type: "application/json"});
+				blob.name = nome;
+				arquivos.push(blob);
+			}
+		}
+		iniciarSimulado();
+	});
+
+	function iniciarSimulado() {
 		if (arquivos.length === 0) return;
 		arquivoAtual = 0;
 		acertosTotal = 0;
@@ -243,7 +263,7 @@
 		resultadosPorArquivo = [];
 		resultado.innerHTML = "";
 		carregarArquivo();
-	});
+	}
 
 	function atualizarBarra() {
 		const progresso = ((arquivoAtual + questaoAtual / questoes.length) / arquivos.length) * 100;
@@ -306,10 +326,9 @@
 				feedback.className = acertou ? "correta" : "incorreta";
 
 				const explicacao = document.createElement("div");
-				explicacao.innerHTML = "📝 " + opcao.feedback;
+				explicacao.innerHTML = "📝 " + (opcao.feedback || "");
 				explicacao.className = "feedback";
 
-				// Se errou, mostra a resposta certa
 				if (!acertou && correta) {
 					const corretaDiv = document.createElement("div");
 					corretaDiv.className = "correta";
@@ -319,7 +338,6 @@
 					qDiv.appendChild(corretaDiv);
 				}
 
-
 				if (opcao.isCorrect) {
 					acertosTotal++;
 					audioCorreto.play();
@@ -328,7 +346,6 @@
 
 				qDiv.appendChild(feedback);
 				qDiv.appendChild(explicacao);
-
 				Array.from(qDiv.getElementsByTagName("button")).forEach(b => b.disabled = true);
 
 				const proximo = document.createElement("button");
@@ -348,15 +365,15 @@
 	function mostrarResultado() {
 		container.innerHTML = "";
 		resultado.innerHTML = `
-        <h2>Simulado Concluído</h2>
-        <p>Você acertou <strong>${acertosTotal}</strong> de <strong>${totalQuestoes}</strong> questões.</p>
-        <h3>Tempos de resposta:</h3>
-        <ul>${tempos.map((t, i) => `<li>Questão ${i + 1}: ${t}s</li>`).join('')}</ul>
-        <h3>Resultado por Arquivo:</h3>
-        ${resultadosPorArquivo.map(r =>
+      <h2>Simulado Concluído</h2>
+      <p>Você acertou <strong>${acertosTotal}</strong> de <strong>${totalQuestoes}</strong> questões.</p>
+      <h3>Tempos de resposta:</h3>
+      <ul>${tempos.map((t, i) => `<li>Questão ${i + 1}: ${t}s</li>`).join('')}</ul>
+      <h3>Resultado por Arquivo:</h3>
+      ${resultadosPorArquivo.map(r =>
 			`<div class="result-arquivo"><strong>${r.nome}</strong>: ${r.acertos}/${r.total} acertos</div>`
 		).join('')}
-      `;
+    `;
 		barra.style.width = "100%";
 	}
 </script>
