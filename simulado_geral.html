@@ -140,6 +140,39 @@
           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
       }
 
+      ul {
+          list-style: none;
+          padding: 0;
+          margin: 0 auto;
+          text-align: center;
+      }
+
+      ul li {
+          margin-bottom: 5px;
+          line-height: 1.5;
+          text-align: center;
+      }
+
+      #resultado {
+          max-width: 700px;
+          margin: 30px auto;
+          padding: 20px;
+          background: #ffffff;
+          border-radius: 12px;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+          word-wrap: break-word;
+      }
+
+      #resultado h2,
+      #resultado h3,
+      #resultado p {
+          text-align: center;
+      }
+
+      .result-arquivo {
+          text-align: center;
+      }
+
       @media (max-width: 600px) {
           #container {
               padding: 20px 15px;
@@ -152,6 +185,15 @@
           button, #fileLabel {
               width: 100%;
               font-size: 1rem;
+          }
+
+          #resultado {
+              padding: 15px;
+              font-size: 0.95rem;
+          }
+
+          ul li {
+              font-size: 0.95rem;
           }
       }
   </style>
@@ -179,7 +221,7 @@
 	const container = document.getElementById("container");
 	const resultado = document.getElementById("resultado");
 	const barra = document.getElementById("barra-progresso");
-  const audioCorreto = document.getElementById("audioCorreto");
+	const audioCorreto = document.getElementById("audioCorreto");
 	const audioErro = document.getElementById("audioErro");
 
 	let arquivos = [];
