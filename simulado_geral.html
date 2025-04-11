@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulado Interativo Geral</title>
+  <style>
+      body {
+          font-family: "Segoe UI", sans-serif;
+          background: #eef2f7;
+          padding: 30px;
+          color: #2c3e50;
+      }
+
+      h1, h2, h3 {
+          text-align: center;
+      }
+
+      #container {
+          max-width: 700px;
+          margin: auto;
+          background: #fff;
+          padding: 25px;
+          border-radius: 10px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .questao {
+          margin-bottom: 30px;
+      }
+
+      .opcao {
+          display: block;
+          margin: 10px 0;
+          padding: 12px;
+          border-radius: 6px;
+          border: 2px solid #3498db;
+          background: #ecf5ff;
+          color: #1e2d40;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.3s ease;
+      }
+
+      .opcao:hover {
+          background: #d6eaff;
+      }
+
+      .correta {
+          color: #27ae60;
+          font-weight: bold;
+      }
+
+      .incorreta {
+          color: #e74c3c;
+          font-weight: bold;
+      }
+
+      button {
+          background: #3498db;
+          color: white;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          margin-top: 20px;
+          cursor: pointer;
+      }
+
+      button:hover {
+          background: #2980b9;
+      }
+
+      #inputJsons {
+          margin: 20px auto;
+          display: block;
+      }
+
+      .feedback {
+          margin-top: 10px;
+          font-style: italic;
+      }
+
+      #progresso {
+          max-width: 700px;
+          margin: 20px auto;
+      }
+
+      .barra {
+          width: 100%;
+          background: #ddd;
+          height: 20px;
+          border-radius: 10px;
+          overflow: hidden;
+          margin-top: 10px;
+      }
+
+      .barra div {
+          height: 100%;
+          background: #3498db;
+          width: 0;
+          transition: width 0.4s ease;
+      }
+
+      .result-arquivo {
+          margin-top: 20px;
+          background: #fff;
+          padding: 15px;
+          border-radius: 10px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+  </style>
+</head>
+<body>
+<h1>Simulado Interativo Geral</h1>
+<input type="file" id="inputJsons" accept=".json" webkitdirectory multiple>
+<div id="progresso">
+  <label>Progresso:</label>
+  <div class="barra">
+    <div id="barra-progresso"></div>
+  </div>
+</div>
+<div id="container">
+  <p>Selecione uma pasta contendo arquivos .json para iniciar o simulado.</p>
+</div>
+<div id="resultado"></div>
+
+<script>
+	const input = document.getElementById("inputJsons");
+	const container = document.getElementById("container");
+	const resultado = document.getElementById("resultado");
+	const barra = document.getElementById("barra-progresso");
+
+	let arquivos = [];
+	let arquivoAtual = 0;
+	let questoes = [];
+	let questaoAtual = 0;
+	let acertosTotal = 0;
+	let totalQuestoes = 0;
+	let tempos = [];
+	let resultadosPorArquivo = [];
+
+	input.addEventListener("change", (event) => {
+		arquivos = Array.from(event.target.files).filter(f => f.name.endsWith(".json")).sort((a, b) => a.name.localeCompare(b.name));
+		if (arquivos.length === 0) return;
+		arquivoAtual = 0;
+		acertosTotal = 0;
+		totalQuestoes = 0;
+		tempos = [];
+		resultadosPorArquivo = [];
+		resultado.innerHTML = "";
+		carregarArquivo();
+	});
+
+	function atualizarBarra() {
+		const progresso = ((arquivoAtual + questaoAtual / questoes.length) / arquivos.length) * 100;
+		barra.style.width = progresso + "%";
+	}
+
+	function carregarArquivo() {
+		const reader = new FileReader();
+		reader.onload = function (e) {
+			const dados = JSON.parse(e.target.result);
+			questoes = dados.content.questions;
+			questaoAtual = 0;
+			resultadosPorArquivo.push({nome: arquivos[arquivoAtual].name, acertos: 0, total: questoes.length});
+			renderizarQuestao();
+		};
+		reader.readAsText(arquivos[arquivoAtual]);
+	}
+
+	function renderizarQuestao() {
+		if (questaoAtual >= questoes.length) {
+			arquivoAtual++;
+			if (arquivoAtual < arquivos.length) {
+				carregarArquivo();
+			} else {
+				mostrarResultado();
+			}
+			return;
+		}
+
+		atualizarBarra();
+		const q = questoes[questaoAtual];
+		const inicio = Date.now();
+		container.innerHTML = "";
+
+		const qDiv = document.createElement("div");
+		qDiv.className = "questao";
+
+		const titulo = document.createElement("h3");
+		titulo.innerHTML = `Arquivo: ${arquivos[arquivoAtual].name}`;
+		qDiv.appendChild(titulo);
+
+		const enunciado = document.createElement("div");
+		enunciado.innerHTML = `<strong>${questaoAtual + 1})</strong> ${q.enunciated}`;
+		qDiv.appendChild(enunciado);
+
+		q.options.forEach((opcao) => {
+			const btn = document.createElement("button");
+			btn.className = "opcao";
+			btn.innerHTML = opcao.text;
+			btn.onclick = () => {
+				const tempo = ((Date.now() - inicio) / 1000).toFixed(2);
+				tempos.push(tempo);
+				totalQuestoes++;
+
+				const feedback = document.createElement("p");
+				const correta = q.options.find(opt => opt.isCorrect);
+				const acertou = opcao.isCorrect;
+
+				feedback.innerHTML = acertou ? "✅ Correto!" : "❌ Incorreto.";
+				feedback.className = acertou ? "correta" : "incorreta";
+
+				const explicacao = document.createElement("div");
+				explicacao.innerHTML = "📝 " + opcao.feedback;
+				explicacao.className = "feedback";
+
+        // Se errou, mostra a resposta certa
+				if (!acertou && correta) {
+					const corretaDiv = document.createElement("div");
+					corretaDiv.className = "correta";
+					corretaDiv.style.marginTop = "10px";
+					corretaDiv.innerHTML = `✔️ Resposta correta: <br><strong>${correta.text}</strong>`;
+					qDiv.appendChild(corretaDiv);
+				}
+
+
+				if (opcao.isCorrect) {
+					acertosTotal++;
+					resultadosPorArquivo[arquivoAtual].acertos++;
+				}
+
+				qDiv.appendChild(feedback);
+				qDiv.appendChild(explicacao);
+
+				Array.from(qDiv.getElementsByTagName("button")).forEach(b => b.disabled = true);
+
+				const proximo = document.createElement("button");
+				proximo.textContent = "Próxima questão";
+				proximo.onclick = () => {
+					questaoAtual++;
+					renderizarQuestao();
+				};
+				qDiv.appendChild(proximo);
+			};
+			qDiv.appendChild(btn);
+		});
+
+		container.appendChild(qDiv);
+	}
+
+	function mostrarResultado() {
+		container.innerHTML = "";
+		resultado.innerHTML = `
+        <h2>Simulado Concluído</h2>
+        <p>Você acertou <strong>${acertosTotal}</strong> de <strong>${totalQuestoes}</strong> questões.</p>
+        <h3>Tempos de resposta:</h3>
+        <ul>${tempos.map((t, i) => `<li>Questão ${i + 1}: ${t}s</li>`).join('')}</ul>
+        <h3>Resultado por Arquivo:</h3>
+        ${resultadosPorArquivo.map(r =>
+			`<div class="result-arquivo"><strong>${r.nome}</strong>: ${r.acertos}/${r.total} acertos</div>`
+		).join('')}
+      `;
+		barra.style.width = "100%";
+	}
+</script>
+</body>
+</html>

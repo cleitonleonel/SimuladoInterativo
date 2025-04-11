@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulado Real Aleatório</title>
+  <style>
+      body {
+          font-family: "Segoe UI", sans-serif;
+          background: #f2f2f2;
+          padding: 30px;
+          color: #333;
+          text-align: center;
+      }
+
+      #container {
+          max-width: 700px;
+          margin: auto;
+          background: #fff;
+          padding: 25px;
+          border-radius: 10px;
+          box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+          margin-bottom: 10px;
+      }
+
+      .opcao {
+          display: block;
+          margin: 10px 0;
+          padding: 12px;
+          border-radius: 6px;
+          border: 2px solid #3498db;
+          background: #ecf5ff;
+          color: #1e2d40;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          text-align: left;
+      }
+
+      .opcao:hover {
+          background: #d6eaff;
+      }
+
+      .correta {
+          color: #27ae60;
+          font-weight: bold;
+          text-align: left;
+      }
+
+      .incorreta {
+          color: #e74c3c;
+          font-weight: bold;
+          text-align: left;
+      }
+
+      .feedback {
+          margin-top: 10px;
+          font-style: italic;
+          text-align: left;
+      }
+
+      button {
+          background: #3498db;
+          color: white;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          margin-top: 20px;
+          cursor: pointer;
+      }
+
+      #timer {
+          font-size: 1.5rem;
+          margin: 20px 0;
+          color: red;
+          font-weight: bold;
+          text-align: center;
+      }
+
+      .barra-progresso {
+          width: 100%;
+          background: #ddd;
+          height: 20px;
+          border-radius: 10px;
+          overflow: hidden;
+          margin: 20px auto;
+          max-width: 700px;
+      }
+
+      .barra-progresso-interna {
+          height: 100%;
+          background: #3498db;
+          width: 0%;
+          transition: width 0.4s ease;
+      }
+  </style>
+</head>
+<body>
+<h1>Simulado Real Aleatório</h1>
+<p>Selecione uma pasta contendo arquivos .json</p>
+<input type="file" id="inputJsons" accept=".json" webkitdirectory multiple>
+<div id="timer">Tempo restante: 60:00</div>
+<div class="barra-progresso">
+  <div id="barraInterna" class="barra-progresso-interna"></div>
+</div>
+<div id="container"></div>
+
+<audio id="audioCorreto" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"></audio>
+<audio id="audioErro" src="https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg"></audio>
+
+<script>
+	const input = document.getElementById("inputJsons");
+	const container = document.getElementById("container");
+	const timerEl = document.getElementById("timer");
+	const barra = document.getElementById("barraInterna");
+	const audioCorreto = document.getElementById("audioCorreto");
+	const audioErro = document.getElementById("audioErro");
+
+	let questoes = [];
+	let questaoAtual = 0;
+	let acertos = 0;
+	let tempoRestante = 60 * 60;
+	let intervalo;
+
+	input.addEventListener("change", async (event) => {
+		const arquivos = Array.from(event.target.files)
+			.filter(f => f.name.endsWith(".json"))
+			.sort(() => 0.5 - Math.random())
+			.slice(0, 10);
+
+		questoes = [];
+		acertos = 0;
+		questaoAtual = 0;
+
+		for (const arq of arquivos) {
+			const texto = await arq.text();
+			const json = JSON.parse(texto);
+			const qs = json.content.questions;
+			const aleatoria = qs[Math.floor(Math.random() * qs.length)];
+			aleatoria._arquivo = arq.name;
+			questoes.push(aleatoria);
+		}
+
+		iniciarCronometro();
+		renderizarQuestao();
+	});
+
+	function iniciarCronometro() {
+		clearInterval(intervalo);
+		intervalo = setInterval(() => {
+			if (tempoRestante <= 0) {
+				clearInterval(intervalo);
+				mostrarResultado("⏰ Tempo esgotado!");
+				return;
+			}
+			tempoRestante--;
+			const minutos = String(Math.floor(tempoRestante / 60)).padStart(2, "0");
+			const segundos = String(tempoRestante % 60).padStart(2, "0");
+			timerEl.textContent = `Tempo restante: ${minutos}:${segundos}`;
+		}, 1000);
+	}
+
+	function atualizarBarra() {
+		const percentual = ((questaoAtual) / questoes.length) * 100;
+		barra.style.width = percentual + "%";
+	}
+
+	function renderizarQuestao() {
+		if (questaoAtual >= questoes.length) {
+			clearInterval(intervalo);
+			mostrarResultado("🎉 Simulado finalizado!");
+			return;
+		}
+
+		atualizarBarra();
+
+		const q = questoes[questaoAtual];
+		container.innerHTML = `
+			<h3 style="text-align: left">${questaoAtual + 1}) ${q.enunciated}</h3>
+			<p style="text-align: left"><em>Arquivo: ${q._arquivo}</em></p>
+		`;
+
+		q.options.forEach(op => {
+			const btn = document.createElement("button");
+			btn.className = "opcao";
+			btn.innerHTML = op.text;
+			btn.onclick = () => {
+				const correta = q.options.find(o => o.isCorrect);
+				const feedback = document.createElement("p");
+				const explicacao = document.createElement("div");
+
+				if (op.isCorrect) {
+					feedback.innerHTML = "✅ Correto!";
+					feedback.className = "correta";
+					audioCorreto.play();
+					acertos++;
+				} else {
+					feedback.innerHTML = "❌ Incorreto. A correta era:" + correta.text;
+					feedback.className = "incorreta";
+					audioErro.play();
+				}
+
+				explicacao.innerHTML = "📝 " + (op.feedback || "Sem justificativa.");
+				explicacao.className = "feedback";
+
+				container.appendChild(feedback);
+				container.appendChild(explicacao);
+
+				Array.from(container.getElementsByTagName("button")).forEach(b => b.disabled = true);
+
+				const btnProx = document.createElement("button");
+				btnProx.textContent = "Próxima questão";
+				btnProx.onclick = () => {
+					questaoAtual++;
+					renderizarQuestao();
+				};
+				container.appendChild(btnProx);
+			};
+			container.appendChild(btn);
+		});
+	}
+
+	function mostrarResultado(msg) {
+		barra.style.width = "100%";
+		container.innerHTML = `
+			<h2>${msg}</h2>
+			<p>Você acertou <strong>${acertos}</strong> de <strong>${questoes.length}</strong> questões.</p>
+			<button onclick="window.location.reload()">🔁 Refazer simulado</button>
+		`;
+	}
+</script>
+</body>
+</html>
