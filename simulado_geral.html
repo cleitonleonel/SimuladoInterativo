@@ -4,15 +4,21 @@
   <meta charset="UTF-8">
   <title>Simulado Interativo Geral</title>
   <style>
+      * {
+          box-sizing: border-box;
+      }
+
       body {
           font-family: "Segoe UI", sans-serif;
-          background: #eef2f7;
-          padding: 30px;
+          background: linear-gradient(to bottom right, #eef2f7, #dfe9f3);
+          padding: 30px 15px;
           color: #2c3e50;
+          margin: 0;
       }
 
       h1, h2, h3 {
           text-align: center;
+          color: #34495e;
       }
 
       #container {
@@ -20,18 +26,20 @@
           margin: auto;
           background: #fff;
           padding: 25px;
-          border-radius: 10px;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+          border-radius: 12px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+          transition: all 0.3s ease;
       }
 
       .questao {
           margin-bottom: 30px;
+          text-align: left;
       }
 
       .opcao {
           display: block;
           margin: 10px 0;
-          padding: 12px;
+          padding: 12px 16px;
           border-radius: 6px;
           border: 2px solid #3498db;
           background: #ecf5ff;
@@ -39,6 +47,7 @@
           font-weight: 500;
           cursor: pointer;
           transition: all 0.3s ease;
+          text-align: left;
       }
 
       .opcao:hover {
@@ -48,35 +57,58 @@
       .correta {
           color: #27ae60;
           font-weight: bold;
+          text-align: left;
       }
 
       .incorreta {
           color: #e74c3c;
           font-weight: bold;
+          text-align: left;
       }
 
       button {
           background: #3498db;
           color: white;
-          padding: 10px 20px;
+          padding: 12px 24px;
           border: none;
-          border-radius: 5px;
+          border-radius: 6px;
           margin-top: 20px;
+          font-weight: 600;
+          font-size: 1rem;
           cursor: pointer;
+          transition: background-color 0.3s ease;
       }
 
       button:hover {
           background: #2980b9;
       }
 
-      #inputJsons {
-          margin: 20px auto;
+      input[type="file"] {
+          display: none;
+      }
+
+      #fileLabel {
           display: block;
+          width: fit-content;
+          margin: 20px auto;
+          background-color: #3498db;
+          color: white;
+          padding: 12px 24px;
+          border-radius: 8px;
+          cursor: pointer;
+          font-weight: 600;
+          transition: background-color 0.3s ease;
+      }
+
+
+      #fileLabel:hover {
+          background-color: #2980b9;
       }
 
       .feedback {
           margin-top: 10px;
           font-style: italic;
+          text-align: left;
       }
 
       #progresso {
@@ -107,10 +139,26 @@
           border-radius: 10px;
           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
       }
+
+      @media (max-width: 600px) {
+          #container {
+              padding: 20px 15px;
+          }
+
+          .opcao {
+              font-size: 0.95rem;
+          }
+
+          button, #fileLabel {
+              width: 100%;
+              font-size: 1rem;
+          }
+      }
   </style>
 </head>
 <body>
 <h1>Simulado Interativo Geral</h1>
+<label id="fileLabel" for="inputJsons">📁 Selecionar pasta com JSONs</label>
 <input type="file" id="inputJsons" accept=".json" webkitdirectory multiple>
 <div id="progresso">
   <label>Progresso:</label>
@@ -123,11 +171,16 @@
 </div>
 <div id="resultado"></div>
 
+<audio id="audioCorreto" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"></audio>
+<audio id="audioErro" src="https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg"></audio>
+
 <script>
 	const input = document.getElementById("inputJsons");
 	const container = document.getElementById("container");
 	const resultado = document.getElementById("resultado");
 	const barra = document.getElementById("barra-progresso");
+  const audioCorreto = document.getElementById("audioCorreto");
+	const audioErro = document.getElementById("audioErro");
 
 	let arquivos = [];
 	let arquivoAtual = 0;
@@ -214,18 +267,20 @@
 				explicacao.innerHTML = "📝 " + opcao.feedback;
 				explicacao.className = "feedback";
 
-        // Se errou, mostra a resposta certa
+				// Se errou, mostra a resposta certa
 				if (!acertou && correta) {
 					const corretaDiv = document.createElement("div");
 					corretaDiv.className = "correta";
 					corretaDiv.style.marginTop = "10px";
 					corretaDiv.innerHTML = `✔️ Resposta correta: <br><strong>${correta.text}</strong>`;
+					audioErro.play();
 					qDiv.appendChild(corretaDiv);
 				}
 
 
 				if (opcao.isCorrect) {
 					acertosTotal++;
+					audioCorreto.play();
 					resultadosPorArquivo[arquivoAtual].acertos++;
 				}
 
