@@ -50,83 +50,83 @@ Você pode criar seus próprios conjuntos de questões para os simulados. A estr
 ## ✅ Estrutura Básica de um JSON Válido
 
 1. Cada arquivo .json deve conter a estrutura abaixo:
-   ```json
-    {
-      "content": {
-        "questions": [
-          {
-            "enunciated": "Qual função é usada para exibir algo na tela em Python?",
-            "options": [
-              {"text": "print()", "isCorrect": true, "feedback": "Correto! A função print() exibe texto na tela."},
-              {"text": "echo()", "isCorrect": false, "feedback": "Errado. echo() não existe em Python."}
-            ]
-          },
-          {
-            "enunciated": "Como se inicia um bloco condicional em Python?",
-            "options": [
-              {"text": "if condicao:", "isCorrect": true, "feedback": "Correto! Um if em Python exige dois pontos no final."},
-              {"text": "if (condicao) {", "isCorrect": false, "feedback": "Errado. Essa é a sintaxe de outras linguagens como C ou JavaScript."}
-            ]
-          },
-          {
-            "enunciated": "Qual estrutura armazena pares chave-valor em Python?",
-            "options": [
-              {"text": "dicionário", "isCorrect": true, "feedback": "Correto! O dicionário armazena pares chave-valor."},
-              {"text": "lista", "isCorrect": false, "feedback": "Errado. Listas armazenam elementos em sequência."}
-            ]
-          },
-          {
-            "enunciated": "Qual a saída de print(type(42))?",
-            "options": [
-              {"text": "<class 'int'>", "isCorrect": true, "feedback": "Correto! O número 42 é um inteiro (int).", "isHTML":  false},
-              {"text": "<type 'integer'>", "isCorrect": false, "feedback": "Errado. Essa não é a notação correta no Python moderno.", "isHTML":  false}
-            ]
-          },
-          {
-            "enunciated": "Qual é o resultado de 3 * 'abc'?",
-            "options": [
-              {"text": "'abcabcabc'", "isCorrect": true, "feedback": "Correto! Strings podem ser repetidas com o operador *."},
-              {"text": "'abc' * 'abc' * 3", "isCorrect": false, "feedback": "Errado. Multiplicação entre strings não é permitida."}
-            ]
-          },
-          {
-            "enunciated": "O que a função len() retorna?",
-            "options": [
-              {"text": "O tamanho de um objeto", "isCorrect": true, "feedback": "Correto! len() retorna a quantidade de itens."},
-              {"text": "O tipo de um objeto", "isCorrect": false, "feedback": "Errado. Para o tipo, usamos type()."}
-            ]
-          },
-          {
-            "enunciated": "Qual das opções define uma função corretamente em Python?",
-            "options": [
-              {"text": "def minha_funcao():", "isCorrect": true, "feedback": "Correto! Funções são definidas com def."},
-              {"text": "function minha_funcao() {", "isCorrect": false, "feedback": "Errado. Isso parece JavaScript."}
-            ]
-          },
-          {
-            "enunciated": "Qual operador é usado para verificar igualdade em Python?",
-            "options": [
-              {"text": "==", "isCorrect": true, "feedback": "Correto! == é o operador de comparação de igualdade."},
-              {"text": "=", "isCorrect": false, "feedback": "Errado. = é usado para atribuição, não comparação."}
-            ]
-          },
-          {
-            "enunciated": "Qual das opções representa uma tupla em Python?",
-            "options": [
-              {"text": "(1, 2, 3)", "isCorrect": true, "feedback": "Correto! Tuplas usam parênteses."},
-              {"text": "[1, 2, 3]", "isCorrect": false, "feedback": "Errado. Isso é uma lista, não uma tupla."}
-            ]
-          },
-          {
-            "enunciated": "O que acontece se você tentar acessar um índice inexistente em uma lista?",
-            "options": [
-              {"text": "Um erro do tipo IndexError é lançado", "isCorrect": true, "feedback": "Correto! Python lança um IndexError."},
-              {"text": "Nada acontece", "isCorrect": false, "feedback": "Errado. Um erro será gerado ao tentar acessar um índice inexistente."}
-            ]
-          }
+```json
+{
+  "content": {
+    "questions": [
+      {
+        "enunciated": "Qual função é usada para exibir algo na tela em Python?",
+        "options": [
+          {"text": "print()", "isCorrect": true, "feedback": "Correto! A função print() exibe texto na tela."},
+          {"text": "echo()", "isCorrect": false, "feedback": "Errado. echo() não existe em Python."}
+        ]
+      },
+      {
+        "enunciated": "Como se inicia um bloco condicional em Python?",
+        "options": [
+          {"text": "if condicao:", "isCorrect": true, "feedback": "Correto! Um if em Python exige dois pontos no final."},
+          {"text": "if (condicao) {", "isCorrect": false, "feedback": "Errado. Essa é a sintaxe de outras linguagens como C ou JavaScript."}
+        ]
+      },
+      {
+        "enunciated": "Qual estrutura armazena pares chave-valor em Python?",
+        "options": [
+          {"text": "dicionário", "isCorrect": true, "feedback": "Correto! O dicionário armazena pares chave-valor."},
+          {"text": "lista", "isCorrect": false, "feedback": "Errado. Listas armazenam elementos em sequência."}
+        ]
+      },
+      {
+        "enunciated": "Qual a saída de print(type(42))?",
+        "options": [
+          {"text": "<class 'int'>", "isCorrect": true, "feedback": "Correto! O número 42 é um inteiro (int).", "isHTML":  false},
+          {"text": "<type 'integer'>", "isCorrect": false, "feedback": "Errado. Essa não é a notação correta no Python moderno.", "isHTML":  false}
+        ]
+      },
+      {
+        "enunciated": "Qual é o resultado de 3 * 'abc'?",
+        "options": [
+          {"text": "'abcabcabc'", "isCorrect": true, "feedback": "Correto! Strings podem ser repetidas com o operador *."},
+          {"text": "'abc' * 'abc' * 3", "isCorrect": false, "feedback": "Errado. Multiplicação entre strings não é permitida."}
+        ]
+      },
+      {
+        "enunciated": "O que a função len() retorna?",
+        "options": [
+          {"text": "O tamanho de um objeto", "isCorrect": true, "feedback": "Correto! len() retorna a quantidade de itens."},
+          {"text": "O tipo de um objeto", "isCorrect": false, "feedback": "Errado. Para o tipo, usamos type()."}
+        ]
+      },
+      {
+        "enunciated": "Qual das opções define uma função corretamente em Python?",
+        "options": [
+          {"text": "def minha_funcao():", "isCorrect": true, "feedback": "Correto! Funções são definidas com def."},
+          {"text": "function minha_funcao() {", "isCorrect": false, "feedback": "Errado. Isso parece JavaScript."}
+        ]
+      },
+      {
+        "enunciated": "Qual operador é usado para verificar igualdade em Python?",
+        "options": [
+          {"text": "==", "isCorrect": true, "feedback": "Correto! == é o operador de comparação de igualdade."},
+          {"text": "=", "isCorrect": false, "feedback": "Errado. = é usado para atribuição, não comparação."}
+        ]
+      },
+      {
+        "enunciated": "Qual das opções representa uma tupla em Python?",
+        "options": [
+          {"text": "(1, 2, 3)", "isCorrect": true, "feedback": "Correto! Tuplas usam parênteses."},
+          {"text": "[1, 2, 3]", "isCorrect": false, "feedback": "Errado. Isso é uma lista, não uma tupla."}
+        ]
+      },
+      {
+        "enunciated": "O que acontece se você tentar acessar um índice inexistente em uma lista?",
+        "options": [
+          {"text": "Um erro do tipo IndexError é lançado", "isCorrect": true, "feedback": "Correto! Python lança um IndexError."},
+          {"text": "Nada acontece", "isCorrect": false, "feedback": "Errado. Um erro será gerado ao tentar acessar um índice inexistente."}
         ]
       }
-    }
+    ]
+  }
+}
 ```
 
 ### 📌 Campos Obrigatórios
