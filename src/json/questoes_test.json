@@ -1,0 +1,13 @@
+{
+  "content": {
+    "questions": [
+      {
+        "enunciated": "Qual a capital da França?",
+        "options": [
+          {"text": "Paris", "isCorrect": true, "feedback": "Correto! Paris é a capital."},
+          {"text": "Londres", "isCorrect": false, "feedback": "Errado. Londres é a capital do Reino Unido."}
+        ]
+      }
+    ]
+  }
+}
