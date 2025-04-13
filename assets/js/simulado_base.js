@@ -72,17 +72,6 @@ function atualizarBarra() {
 	barra.style.width = progresso + "%";
 }
 
-function escaparHTML(str) {
-	const div = document.createElement("div");
-	div.appendChild(document.createTextNode(str));
-	return div.innerHTML;
-}
-
-function renderOpcao(op) {
-	const isHTML = op.isHTML ?? true;
-	return isHTML ? op.text : escaparHTML(op.text);
-}
-
 function renderizarQuestaoReal() {
 	if (questaoAtual >= questoes.length) {
 		clearInterval(intervalo);
@@ -100,7 +89,8 @@ function renderizarQuestaoReal() {
 	q.options.forEach(op => {
 		const btn = document.createElement("button");
 		btn.className = "opcao";
-		btn.innerHTML = renderOpcao(op);
+		//btn.innerHTML = renderOpcao(op);
+		renderConteudoComFlag(btn, op.text, op.isHTML);
 		btn.onclick = () => {
 			const correta = q.options.find(o => o.isCorrect);
 			const feedback = document.createElement("p");
@@ -167,7 +157,8 @@ function renderizarQuestao() {
 	q.options.forEach((opcao) => {
 		const btn = document.createElement("button");
 		btn.className = "opcao";
-		btn.innerHTML = renderOpcao(opcao);
+		//btn.innerHTML = renderOpcao(opcao);
+		renderConteudoComFlag(btn, opcao.text, opcao.isHTML);
 		btn.onclick = () => {
 			const tempo = ((Date.now() - inicio) / 1000).toFixed(2);
 			tempos.push(tempo);
@@ -292,5 +283,29 @@ function compartilharWhatsApp() {
 	const mensagem = `${header}\n\n${acertosLinha}\n📄 Resultados por arquivo:\n${resultados}`;
 	const url = `https://web.whatsapp.com/send/?text=${encodeURIComponent(mensagem)}`;
 	window.open(url, '_blank');
+}
+
+function renderConteudoSeguro(destino, texto) {
+  const el = document.createElement("div");
+  el.innerHTML = texto;
+
+  const contemTagsHTML = el.innerHTML !== el.textContent;
+  destino.innerHTML = contemTagsHTML ? texto : escapeHTML(texto);
+}
+
+function escapeHTML(str) {
+  const div = document.createElement("div");
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function renderConteudoComFlag(destino, texto, isHTML = null) {
+  if (isHTML === true) {
+    destino.innerHTML = texto;
+  } else if (isHTML === false) {
+    destino.innerHTML = escapeHTML(texto);
+  } else {
+    renderConteudoSeguro(destino, texto);
+  }
 }
 
