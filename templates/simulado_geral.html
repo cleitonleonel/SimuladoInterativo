@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulado Interativo Geral</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/assets/css/simulado.css">
+</head>
+<body>
+<h1>Simulado Interativo Geral</h1>
+<p>Selecione o tipo de arquivo para iniciar:</p>
+<label id="fileLabelJson" for="inputJson">📁 Selecionar pasta</label>
+<input type="file" id="inputJson" accept=".json" webkitdirectory multiple>
+<label id="fileLabelZip" for="inputZip">🗜️ Selecionar .zip</label>
+<input type="file" id="inputZip" accept=".zip">
+<div class="barra-progresso">
+  <div id="barraInterna" class="barra-progresso-interna"></div>
+</div>
+<div id="container">
+  <p>Após escolher o tipo de arquivo, o simulado será iniciado automaticamente.</p>
+</div>
+<div id="resultado"></div>
+<audio id="audioCorreto" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"></audio>
+<audio id="audioErro" src="https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg"></audio>
+<script src="/assets/js/simulado_geral.js"></script>
+<script src="/assets/js/simulado_base.js"></script>
+</body>
+</html>

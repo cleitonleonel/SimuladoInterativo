@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulado Real Aleatório</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="/assets/css/simulado.css">
+</head>
+<body>
+<h1>Simulado Real Aleatório</h1>
+<p class="instrucao">📁 Escolha como deseja carregar as questões:</p>
+<label id="fileLabelJson" for="inputJson">📁 Selecionar pasta</label>
+<input type="file" id="inputJson" accept=".json" webkitdirectory multiple>
+<label id="fileLabelZip" for="inputZip">🗜️ Selecionar .zip</label>
+<input type="file" id="inputZip" accept=".zip">
+<div id="timer">Tempo restante: 60:00</div>
+<div class="barra-progresso">
+  <div id="barraInterna" class="barra-progresso-interna"></div>
+</div>
+<div id="container">
+  <p>O simulado será carregado automaticamente após a escolha.</p>
+</div>
+<audio id="audioCorreto" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"></audio>
+<audio id="audioErro" src="https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg"></audio>
+<script src="/assets/js/simulado_real.js"></script>
+<script src="/assets/js/simulado_base.js"></script>
+</body>
+</html>
