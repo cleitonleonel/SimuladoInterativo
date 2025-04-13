@@ -147,7 +147,7 @@ Você pode criar seus próprios conjuntos de questões para os simulados. A estr
 
 Por padrão, o conteúdo da opção (`text`) será **renderizado como HTML**.
 
-Se a resposta tiver tags (<>) o texto não é exibido corretamenta.
+Se a resposta tiver tags (<>) o texto não é exibido corretamente.
 ![without_flag.png](assets/img/without_flag.png)
 
 Caso a opção contenha **texto que se pareça com tags HTML, mas não deve ser interpretado como tal**, defina `"isHTML": false`.
