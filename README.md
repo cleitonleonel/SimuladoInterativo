@@ -197,7 +197,7 @@ Caso a opção contenha **texto que se pareça com tags HTML, mas não deve ser 
 
 ### ▶️ Simulado Real Aleatório
 
-- Aceita arquivos `.json` individuais ou `.zip` com vários arquivos `.json`.
+- Aceita múltiplos arquivos `.json` ou múltiplos arquivos `.zip` com vários arquivos `.json`.
 - O sistema irá **sortear 10 questões aleatórias** de todos os arquivos disponíveis.
 
 **Use `.zip` quando:**
@@ -205,12 +205,13 @@ Caso a opção contenha **texto que se pareça com tags HTML, mas não deve ser 
 - Deseja que o sorteio ocorra a partir de um conjunto maior de questões.
 
 **Use `.json` quando:**
-- Você tem todas as perguntas em um único arquivo.
+- Você tem todas as perguntas de uma disciplina espalhadas em vários arquivos 
+e quer testar tudo em um único simulado.
 - Quer testar ou simular rapidamente um conjunto específico.
 
 ### 📚 Simulado Geral
 
-- Aceita **apenas um arquivo `.json`**.
+- Aceita **múltiplos arquivos `.json`**.
 - Todas as questões contidas serão utilizadas na ordem em que aparecem.
 
 ---
@@ -235,11 +236,10 @@ Para garantir que seus arquivos estão válidos:
 
 ## ❗ Observação Importante
 
-Para manter a fidelidade de um simulado real, **não é possível selecionar um arquivo `.json` individual diretamente**.
-Os simulados (tanto o **Simulado Real Aleatório** quanto o **Simulado Geral**) **exigem que você selecione uma pasta contendo vários arquivos `.json`**. Cada arquivo representa um conjunto de questões (por exemplo, uma disciplina, um tema ou um módulo).
-Se você deseja simular apenas uma disciplina específica ou um único conjunto de questões, há duas formas de fazer isso:
+Para manter a fidelidade de um simulado real cada arquivo deve representar um conjunto de questões (por exemplo, uma disciplina, um tema ou um módulo).
+Abaixo há duas formas de como garantir uma boa organização:
 
-1. **Coloque todas as questões em um único arquivo `.json`** e salve este arquivo em uma pasta (mesmo que ele seja o único da pasta). Depois, selecione essa pasta ao iniciar o simulado.
+1. **Coloque todas as questões em um único arquivo `.json`** e salve este arquivo em uma pasta (mesmo que ele seja o único da pasta). Depois, selecione essa pasta ao iniciar o simulado e posteriormente o arquivo `.json` .
 2. **Compacte o arquivo `.json` em um `.zip`** e use a opção de seleção de arquivo `.zip`. O sistema descompactará automaticamente e carregará o conteúdo como se fosse uma pasta.
 
 📁 Exemplo:

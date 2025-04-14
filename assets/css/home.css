@@ -45,15 +45,6 @@ body {
     align-items: center;
 }
 
-.social-icon{
-    vertical-align: middle;
-    margin-right: 5px;
-}
-.social-link {
-    color:#2980b9;
-    text-decoration:none;
-}
-
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -122,7 +113,18 @@ h1 {
 }
 
 .social-icon {
+    vertical-align: middle;
+    margin-right: 5px;
     transition: transform 0.3s ease;
+}
+
+.dark-mode .social-icon-github {
+    filter: invert(1);
+}
+
+.social-link {
+    color:#2980b9;
+    text-decoration:none;
 }
 
 .social-icon:hover {
