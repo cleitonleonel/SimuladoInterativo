@@ -8,12 +8,18 @@
   <link rel="stylesheet" type="text/css" href="../assets/css/simulado.css">
 </head>
 <body>
+
 <h1>Simulado Real Aleatório</h1>
 <p class="instrucao">📁 Escolha como deseja carregar as questões:</p>
-<label id="fileLabelJson" for="inputJson">📁 Selecionar .json(s)</label>
-<input type="file" id="inputJson" accept=".json" multiple>
-<label id="fileLabelZip" for="inputZip">🗜️ Selecionar .zip(s)</label>
-<input type="file" id="inputZip" accept=".zip" multiple>
+<div id="button-container">
+  <label id="fileLabelJson" for="inputJson">📁 Selecionar .json(s)</label>
+  <input type="file" id="inputJson" accept=".json" multiple>
+
+  <label id="fileLabelZip" for="inputZip">🗜️ Selecionar .zip(s)</label>
+  <input type="file" id="inputZip" accept=".zip" multiple>
+
+  <button id="btnIA">⚡ Gerar questões com IA</button>
+</div>
 <div id="timer">Tempo restante: 60:00</div>
 <div class="barra-progresso">
   <div id="barraInterna" class="barra-progresso-interna"></div>
@@ -21,9 +27,27 @@
 <div id="container">
   <p>O simulado será carregado automaticamente após a escolha.</p>
 </div>
+<div id="modalIA" class="modal">
+  <div class="modal-content">
+    <span class="close" id="fecharModalIA">&times;</span>
+    <h2>Gerar Questões com IA</h2>
+    <label for="api_key">🔑 Chave da API Gemini: </label>
+    <span><a href="https://aistudio.google.com/apikey">Não tem uma chave de api?</a></span>
+    <input type="text" id="api_key" placeholder="Digite sua chave...">
+
+    <label for="prompt">📝 Prompt:</label>
+    <textarea id="prompt" rows="6" placeholder="Descreva o tipo de questões que deseja gerar..."></textarea>
+
+    <div id="loading">⏳ Gerando questões...</div>
+    <div id="error-message" style="color: red;"></div>
+    <button class="send-btn" onclick="enviarPrompt()">🚀 Enviar</button>
+    <div id="message"></div>
+  </div>
+</div>
 <audio id="audioCorreto" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"></audio>
 <audio id="audioErro" src="https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg"></audio>
-<script src="../assets/js/simulado_real.js"></script>
 <script src="../assets/js/simulado_base.js"></script>
+<script src="../assets/js/simulado_real.js"></script>
+<script src="../assets/js/aistudio.js"></script>
 </body>
 </html>

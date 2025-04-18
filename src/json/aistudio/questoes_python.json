@@ -1,0 +1,105 @@
+{
+  "content": {
+    "questions": [
+      {
+        "enunciated": "Qual palavra-chave é usada para definir uma função em Python?",
+        "options": [
+          {"text": "fun", "isCorrect": false, "feedback": "Incorreto. 'fun' não é uma palavra-chave de definição de função em Python."},
+          {"text": "define", "isCorrect": false, "feedback": "Incorreto. 'define' não é usado para definir funções em Python."},
+          {"text": "def", "isCorrect": true, "feedback": "Correto! 'def' é a palavra-chave para definir funções."},
+          {"text": "function", "isCorrect": false, "feedback": "Incorreto. Embora conceitual, 'function' não é a palavra-chave em Python."}
+        ]
+      },
+      {
+        "enunciated": "Qual destes tipos de dados é imutável em Python?",
+        "options": [
+          {"text": "list", "isCorrect": false, "feedback": "Incorreto. Listas são mutáveis, seus elementos podem ser alterados."},
+          {"text": "dict", "isCorrect": false, "feedback": "Incorreto. Dicionários são mutáveis."},
+          {"text": "set", "isCorrect": false, "feedback": "Incorreto. Sets são mutáveis (embora seus elementos devam ser imutáveis)."},
+          {"text": "tuple", "isCorrect": true, "feedback": "Correto! Tuplas são sequências imutáveis."}
+        ]
+      },
+      {
+        "enunciated": "Como você escreve um comentário de uma linha em Python?",
+        "options": [
+          {"text": "// Comentário", "isCorrect": false, "feedback": "Incorreto. '//' é usado para comentários em outras linguagens como C++ ou Java."},
+          {"text": "/* Comentário */", "isCorrect": false, "feedback": "Incorreto. '/* */' é usado para comentários de múltiplas linhas em C ou CSS."},
+          {"text": "# Comentário", "isCorrect": true, "feedback": "Correto! O caractere '#' inicia um comentário de linha única em Python."},
+          {"text": "<!-- Comentário -->", "isCorrect": false, "feedback": "Incorreto. Isso é um comentário HTML."}
+        ]
+      },
+      {
+        "enunciated": "Qual função é usada para obter a entrada do usuário no console?",
+        "options": [
+          {"text": "get_input()", "isCorrect": false, "feedback": "Incorreto. Não existe uma função built-in chamada 'get_input'."},
+          {"text": "input()", "isCorrect": true, "feedback": "Correto! 'input()' lê uma linha do console como string."},
+          {"text": "read()", "isCorrect": false, "feedback": "Incorreto. 'read()' é geralmente associado à leitura de arquivos."},
+          {"text": "console.input()", "isCorrect": false, "feedback": "Incorreto. Isso não é sintaxe padrão do Python."}
+        ]
+      },
+      {
+        "enunciated": "Qual operador é usado para verificar se dois valores são iguais?",
+        "options": [
+          {"text": "=", "isCorrect": false, "feedback": "Incorreto. '=' é o operador de atribuição."},
+          {"text": "==", "isCorrect": true, "feedback": "Correto! '==' é o operador de comparação de igualdade."},
+          {"text": "!=", "isCorrect": false, "feedback": "Incorreto. '!=' verifica se os valores são diferentes."},
+          {"text": "is", "isCorrect": false, "feedback": "Incorreto. 'is' verifica se duas variáveis apontam para o mesmo objeto na memória."}
+        ]
+      },
+      {
+        "enunciated": "Qual estrutura de controle é usada para tomar decisões baseadas em condições?",
+        "options": [
+          {"text": "for", "isCorrect": false, "feedback": "Incorreto. 'for' é usado para iteração (loops)."},
+          {"text": "while", "isCorrect": false, "feedback": "Incorreto. 'while' é usado para loops baseados em condição."},
+          {"text": "if/elif/else", "isCorrect": true, "feedback": "Correto! 'if', 'elif' e 'else' são usados para execução condicional."},
+          {"text": "try/except", "isCorrect": false, "feedback": "Incorreto. 'try/except' é usado para tratamento de exceções."}
+        ]
+      },
+      {
+        "enunciated": "Qual método é usado para adicionar um item ao final de uma lista?",
+        "options": [
+          {"text": "add()", "isCorrect": false, "feedback": "Incorreto. 'add()' é usado para adicionar elementos a um set."},
+          {"text": "insert()", "isCorrect": false, "feedback": "Incorreto. 'insert()' adiciona um item em uma posição específica."},
+          {"text": "append()", "isCorrect": true, "feedback": "Correto! 'append()' adiciona um item ao final da lista."},
+          {"text": "extend()", "isCorrect": false, "feedback": "Incorreto. 'extend()' adiciona todos os itens de um iterável ao final da lista."}
+        ]
+      },
+      {
+        "enunciated": "Qual é o resultado de `3 * 'a'` em Python?",
+        "options": [
+          {"text": "aaa", "isCorrect": false, "feedback": "Incorreto. A multiplicação de string repete a string."},
+          {"text": "'aaa'", "isCorrect": true, "feedback": "Correto! Multiplicar uma string por um inteiro 'n' repete a string 'n' vezes."},
+          {"text": "3a", "isCorrect": false, "feedback": "Incorreto. Python não concatena dessa forma implicitamente."},
+          {"text": "Erro", "isCorrect": false, "feedback": "Incorreto. Esta é uma operação válida em Python."}
+        ]
+      },
+      {
+        "enunciated": "Como você obtém o número de elementos em uma lista chamada `minha_lista`?",
+        "options": [
+          {"text": "minha_lista.size()", "isCorrect": false, "feedback": "Incorreto. '.size()' não é um método padrão de lista em Python."},
+          {"text": "count(minha_lista)", "isCorrect": false, "feedback": "Incorreto. 'count()' é um método de lista para contar ocorrências de um valor."},
+          {"text": "len(minha_lista)", "isCorrect": true, "feedback": "Correto! A função built-in 'len()' retorna o número de itens em um container."},
+          {"text": "minha_lista.length", "isCorrect": false, "feedback": "Incorreto. '.length' não é um atributo padrão de lista em Python."}
+        ]
+      },
+      {
+        "enunciated": "Qual coleção Python armazena pares de chave-valor?",
+        "options": [
+          {"text": "list", "isCorrect": false, "feedback": "Incorreto. Listas armazenam sequências ordenadas."},
+          {"text": "tuple", "isCorrect": false, "feedback": "Incorreto. Tuplas armazenam sequências ordenadas e imutáveis."},
+          {"text": "set", "isCorrect": false, "feedback": "Incorreto. Sets armazenam coleções não ordenadas de itens únicos."},
+          {"text": "dict", "isCorrect": true, "feedback": "Correto! Dicionários (dict) armazenam dados como pares de chave-valor."}
+        ]
+      },
+      {
+        "enunciated": "Qual o operador para exponenciação (potência) em Python?",
+        "options": [
+          {"text": "^", "isCorrect": false, "feedback": "Incorreto. Em Python, '^' é o operador XOR bitwise."},
+          {"text": "**", "isCorrect": true, "feedback": "Correto! '**' é usado para calcular potências (ex: 2 ** 3 resulta em 8)."},
+          {"text": "pow()", "isCorrect": false, "feedback": "Incorreto. Embora 'pow(x, y)' seja uma função que calcula potência, a pergunta pede o *operador*."},
+          {"text": "exp()", "isCorrect": false, "feedback": "Incorreto. 'exp()' geralmente se refere à função exponencial (e^x) no módulo math."}
+        ]
+      }
+    ]
+  }
+}

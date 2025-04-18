@@ -184,6 +184,124 @@ ul li {
     font-weight: bold;
 }
 
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    padding-top: 80px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: opacity 0.3s ease;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 40px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.modal.show {
+    display: block;
+    opacity: 1;
+}
+
+.modal-content.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #000;
+}
+
+textarea, input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+textarea:focus, input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+#btnIA {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#btnIA:hover {
+    background-color: #0056b3;
+}
+
+.send-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.send-btn:hover {
+    background-color: #218838;
+}
+
+#loading {
+    display: none;
+    font-style: italic;
+    color: #555;
+}
+
+#error-message {
+    color: red;
+    font-size: 14px;
+}
+
+#message {
+    color: #28a745;
+}
+
+.modal-content {
+    opacity: 0;
+    transform: translateY(-30px);
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 @media (max-width: 600px) {
     #container {
         padding: 20px 15px;
@@ -205,5 +323,10 @@ ul li {
 
     ul li {
         font-size: 0.95rem;
+    }
+
+    #button-container {
+        flex-direction: column;
+        align-items: center;
     }
 }
