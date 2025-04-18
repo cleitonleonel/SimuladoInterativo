@@ -120,9 +120,17 @@ window.onclick = function (event) {
 	}
 };
 
-document.getElementById("prompt").addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-        event.preventDefault();
-        enviarPrompt().then(r => {});
-    }
+document.getElementById("prompt").addEventListener("keypress", function (event) {
+	if (event.key === "Enter") {
+		event.preventDefault();
+		enviarPrompt().then(r => {
+		});
+	}
+});
+
+document.getElementById("toggleApiKey").addEventListener("click", function () {
+	const input = document.getElementById("api_key");
+	const isPassword = input.type === "password";
+	input.type = isPassword ? "text" : "password";
+	this.textContent = isPassword ? "🙈" : "👁️";
 });
