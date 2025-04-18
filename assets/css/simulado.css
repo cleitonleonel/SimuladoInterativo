@@ -7,7 +7,7 @@ body {
     background: linear-gradient(to bottom right, #eef2f7, #dfe9f3);
     color: #2c3e50;
     margin: 0;
-    padding: 30px 15px;
+    padding: 40px 20px;
     text-align: center;
 }
 
@@ -28,10 +28,11 @@ p.instrucao {
 }
 
 #container {
-    max-width: 700px;
+    max-width: 950px;
+    width: 100%;
     margin: auto;
     background: #fff;
-    padding: 25px;
+    padding: 30px;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
@@ -78,18 +79,25 @@ p.instrucao {
     text-align: left;
 }
 
+button,
+#fileLabelZip,
+#fileLabelJson,
+#btnIA {
+    margin: 10px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+/* Botões principais */
 button {
     background: #3498db;
     color: white;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 6px;
-    margin: 20px auto 0;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    display: block;
 }
 
 button:hover {
@@ -104,28 +112,44 @@ button.whatsapp:hover {
     background-color: #1ebe5d;
 }
 
+/* Botão IA */
+#btnIA {
+    background-color: #007bff;
+    color: white;
+}
+
+#btnIA:hover {
+    background-color: #0056b3;
+}
+
+/* Botão envio prompt IA */
+.send-btn {
+    background-color: #28a745;
+    color: white;
+    width: 100%;
+}
+
+.send-btn:hover {
+    background-color: #218838;
+}
+
+/* Upload */
 input[type="file"] {
     display: none;
 }
 
 #fileLabelZip, #fileLabelJson {
-    display: inline-block;
-    margin: 10px;
-    padding: 12px 24px;
     background-color: #3498db;
     color: white;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
 }
 
 #fileLabelZip:hover, #fileLabelJson:hover {
     background-color: #2980b9;
 }
 
+/* Progresso */
 #progresso, .barra-progresso {
-    max-width: 700px;
+    max-width: 950px;
     margin: 20px auto;
     width: 100%;
     background: #ddd;
@@ -142,7 +166,7 @@ input[type="file"] {
 }
 
 #resultado {
-    max-width: 700px;
+    max-width: 950px;
     margin: 30px auto;
     padding: 20px;
     background: #ffffff;
@@ -184,6 +208,7 @@ ul li {
     font-weight: bold;
 }
 
+/* Modal */
 .modal {
     display: none;
     position: fixed;
@@ -207,6 +232,8 @@ ul li {
     max-width: 600px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    transform: translateY(-30px);
 }
 
 .modal.show {
@@ -246,37 +273,6 @@ textarea:focus, input[type="text"]:focus {
     outline: none;
 }
 
-#btnIA {
-    background-color: #007bff;
-    color: white;
-    padding: 12px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#btnIA:hover {
-    background-color: #0056b3;
-}
-
-.send-btn {
-    background-color: #28a745;
-    color: white;
-    padding: 12px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 100%;
-    transition: background-color 0.3s ease;
-}
-
-.send-btn:hover {
-    background-color: #218838;
-}
-
 #loading {
     display: none;
     font-style: italic;
@@ -292,28 +288,25 @@ textarea:focus, input[type="text"]:focus {
     color: #28a745;
 }
 
-.modal-content {
-    opacity: 0;
-    transform: translateY(-30px);
-}
-
-.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
+/* Responsividade */
 @media (max-width: 600px) {
     #container {
         padding: 20px 15px;
+        max-width: 100%;
     }
 
     .opcao {
         font-size: 0.95rem;
     }
 
-    button, #fileLabelZip, #fileLabelJson {
+    button,
+    #fileLabelZip,
+    #fileLabelJson,
+    #btnIA {
         width: 100%;
+        margin: 8px 0;
         font-size: 1rem;
+        padding: 12px;
     }
 
     #resultado {
