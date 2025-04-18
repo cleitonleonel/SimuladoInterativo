@@ -112,6 +112,26 @@ button.whatsapp:hover {
     background-color: #1ebe5d;
 }
 
+button.btn-back {
+    display: block;
+    margin: 0 0 20px 0;
+    background-color: #ccc;
+    color: #333;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: left;
+    width: fit-content;
+    transition: background-color 0.3s ease;
+}
+
+button.btn-back:hover {
+    background-color: #bbb;
+}
+
 /* Botão IA */
 #btnIA {
     background-color: #007bff;
