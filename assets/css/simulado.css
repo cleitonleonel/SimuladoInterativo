@@ -7,7 +7,7 @@ body {
     background: linear-gradient(to bottom right, #eef2f7, #dfe9f3);
     color: #2c3e50;
     margin: 0;
-    padding: 10px 10px 0 10px;
+    padding: 10px 50px 0 10px;
     text-align: center;
 }
 
@@ -147,6 +147,15 @@ button.btn-back:hover {
     background-color: #28a745;
     color: white;
     width: 100%;
+    display: block; /* Ensures block-level display */
+    margin: 15px 0 5px 0; /* Consistent spacing */
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
 }
 
 .send-btn:hover {
@@ -286,6 +295,8 @@ textarea, input[type="text"], input[type="password"] {
     border-radius: 8px;
     border: 1px solid #ccc;
     font-size: 16px;
+    display: block; /* Ensures block-level display */
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
 }
 
 textarea:focus, input[type="text"]:focus {
