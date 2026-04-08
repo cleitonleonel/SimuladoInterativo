@@ -82,7 +82,7 @@ function renderizarQuestaoReal() {
 	atualizarBarraReal();
 	const q = questoes[questaoAtual];
 	container.innerHTML = `
-      <h3 style="text-align: left">${questaoAtual + 1}) ${q.enunciated}</h3>
+      <div class="enunciado" style="text-align: left"><strong>${questaoAtual + 1})</strong> ${formatarTexto(q.enunciated)}</div>
       <p style="text-align: left"><em>Arquivo: ${q._arquivo}</em></p>
     `;
 	
@@ -151,7 +151,7 @@ function renderizarQuestao() {
 	qDiv.appendChild(titulo);
 	
 	const enunciado = document.createElement("div");
-	enunciado.innerHTML = `<strong>${questaoAtual + 1})</strong> ${q.enunciated}`;
+	enunciado.innerHTML = `<strong>${questaoAtual + 1})</strong> ${formatarTexto(q.enunciated)}`;
 	qDiv.appendChild(enunciado);
 	
 	q.options.forEach((opcao) => {
@@ -299,6 +299,180 @@ function escapeHTML(str) {
   return div.innerHTML;
 }
 
+const ALIAS_LINGUAGEM = {
+  py: 'python', js: 'javascript', ts: 'javascript',
+  cpp: 'c', 'c++': 'c', cc: 'c',
+  htm: 'html',
+};
+
+function normalizarLinguagem(lang) {
+  const l = (lang || '').toLowerCase().trim();
+  return ALIAS_LINGUAGEM[l] || l || null;
+}
+
+function detectarLinguagem(linhas) {
+  const codigo = linhas.join('\n');
+  if (/public\s+class|import\s+java\.|System\.out|extends\s+\w|implements\s+\w/.test(codigo)) return 'java';
+  if (/def\s+\w+\s*\(|self\.\w|^\s*print\s*\(|^\s*from\s+\w+\s+import|elif\s+|^\s*pass\s*$/m.test(codigo)) return 'python';
+  if (/function\s*[\w(]|const\s+\w+\s*=|let\s+\w+|var\s+\w+|console\.log|=>\s*[{(]/.test(codigo)) return 'javascript';
+  if (/#include\s*<|printf\s*\(|scanf\s*\(|int\s+main\s*\(/.test(codigo)) return 'c';
+  if (/<html|<!DOCTYPE|<div|<p>|<span/i.test(codigo)) return 'html';
+  return 'default';
+}
+
+function tamanhoTab(linguagem) {
+  return { java: 2, javascript: 2, html: 2, python: 4, c: 4 }[linguagem] ?? 2;
+}
+
+function indentarChaves(linhas, tabSize) {
+  const tab = ' '.repeat(tabSize);
+  let nivel = 0;
+  return linhas.map(linha => {
+    const t = linha.trim();
+    if (!t) return '';
+    const abre = (t.match(/\{/g) || []).length;
+    const fecha = (t.match(/\}/g) || []).length;
+    const net = abre - fecha;
+    if (t.startsWith('}')) {
+      nivel = Math.max(0, nivel - 1);
+      const r = tab.repeat(nivel) + t;
+      nivel = Math.max(0, nivel + net + 1);
+      return r;
+    }
+    const r = tab.repeat(nivel) + t;
+    nivel = Math.max(0, nivel + net);
+    return r;
+  });
+}
+
+function indentarPython(linhas, tabSize) {
+  const tab = ' '.repeat(tabSize);
+  const expandirTabs = (linha) => linha.replace(/\t/g, tab);
+  const naoVazias = linhas
+    .map(expandirTabs)
+    .filter(linha => linha.trim().length > 0);
+  const possuiIndentacaoOriginal = naoVazias.some(linha => /^\s+/.test(linha));
+
+  // Quando o texto já traz indentação, não tentamos "adivinhar" blocos;
+  // apenas normalizamos o deslocamento comum para evitar aninhamento incorreto.
+  if (possuiIndentacaoOriginal) {
+    const menorIndent = naoVazias.reduce((min, linha) => {
+      const atual = (linha.match(/^\s*/) || [''])[0].length;
+      return Math.min(min, atual);
+    }, Infinity);
+
+    return linhas.map(linha => {
+      const expandida = expandirTabs(linha).trimEnd();
+      if (!expandida.trim()) return '';
+      return expandida.slice(Math.min(menorIndent, expandida.length));
+    });
+  }
+
+  let nivel = 0;
+  return linhas.map(linha => {
+    const t = linha.trim();
+    if (!t) return '';
+    if (/^class\b/.test(t)) nivel = 0;
+    else if (/^def\b/.test(t)) nivel = Math.max(0, nivel - 1);
+    else if (/^(else|elif|except|finally)\b/.test(t)) nivel = Math.max(0, nivel - 1);
+    const r = tab.repeat(nivel) + t;
+    if (t.endsWith(':')) nivel++;
+    return r;
+  });
+}
+
+function indentarHTML(linhas, tabSize) {
+  const tab = ' '.repeat(tabSize);
+  let nivel = 0;
+  const VOID = /^<(area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr)/i;
+  return linhas.map(linha => {
+    const t = linha.trim();
+    if (!t) return '';
+    if (/^<\//.test(t)) nivel = Math.max(0, nivel - 1);
+    const r = tab.repeat(nivel) + t;
+    if (/^<\w/.test(t) && !VOID.test(t) && !t.endsWith('/>') && !/<\/\w+>$/.test(t)) nivel++;
+    return r;
+  });
+}
+
+function indentarCodigo(linhas, linguagem) {
+  const size = tamanhoTab(linguagem);
+  if (linguagem === 'python') return indentarPython(linhas, size);
+  if (linguagem === 'html') return indentarHTML(linhas, size);
+  return indentarChaves(linhas, size);
+}
+
+function formatarTexto(texto) {
+  const linhas = texto.split('\n');
+  const resultado = [];
+  let emBlocoFence = false;
+  let linguagemFence = null;
+  let emBlocoHeuristico = false;
+  let blocoAtual = [];
+
+  const CODIGO_REGEX = /^(public|private|protected|class|interface|enum|abstract|void|int|double|float|long|boolean|char|byte|short|String|return|import|package|if\s*[\({]|else[\s{]|for\s*\(|while\s*\(|do\s*[{(]|try\s*\{|catch\s*\(|finally|new\s+\w|static|final|this\.|super\.|self\.|def\s+\w|elif\s|pass\b|\/\/|\/\*|\*|\}|@\w)/;
+
+  const pareceCodigoLinha = (linha) => {
+    const l = linha.trim();
+    if (!l) return emBlocoHeuristico;
+    return CODIGO_REGEX.test(l) || /[{};]$/.test(l);
+  };
+
+  const emitirBloco = (linguagem) => {
+    const lang = linguagem || detectarLinguagem(blocoAtual);
+    const indentado = indentarCodigo(blocoAtual, lang);
+    resultado.push(`<pre><code>${escapeHTML(indentado.join('\n'))}</code></pre>`);
+    emBlocoHeuristico = false;
+    blocoAtual = [];
+  };
+
+  for (const linha of linhas) {
+    const trimmed = linha.trim();
+
+    // Detecta abertura de fence: ```linguagem ou ```
+    const fenceAbrir = !emBlocoFence && trimmed.match(/^```(\w*)$/);
+    if (fenceAbrir) {
+      if (emBlocoHeuristico) emitirBloco(null); // fecha bloco heurístico pendente
+      emBlocoFence = true;
+      linguagemFence = normalizarLinguagem(fenceAbrir[1]);
+      blocoAtual = [];
+      continue;
+    }
+
+    // Detecta fechamento de fence
+    if (emBlocoFence && trimmed === '```') {
+      emitirBloco(linguagemFence);
+      emBlocoFence = false;
+      linguagemFence = null;
+      continue;
+    }
+
+    // Dentro de bloco fence: acumula linha como está
+    if (emBlocoFence) {
+      blocoAtual.push(linha);
+      continue;
+    }
+
+    // Detecção heurística para blocos sem fence
+    if (pareceCodigoLinha(linha)) {
+      if (!emBlocoHeuristico) {
+        emBlocoHeuristico = true;
+        blocoAtual = [];
+      }
+      blocoAtual.push(linha);
+    } else {
+      if (emBlocoHeuristico) emitirBloco(null);
+      if (trimmed) resultado.push(escapeHTML(linha));
+    }
+  }
+
+  // Fecha blocos não encerrados
+  if (emBlocoFence && blocoAtual.length > 0) emitirBloco(linguagemFence);
+  else if (emBlocoHeuristico && blocoAtual.length > 0) emitirBloco(null);
+
+  return resultado.join('<br>');
+}
+
 function renderConteudoComFlag(destino, texto, isHTML = null) {
   if (isHTML === true) {
     destino.innerHTML = texto;
@@ -308,4 +482,3 @@ function renderConteudoComFlag(destino, texto, isHTML = null) {
     renderConteudoSeguro(destino, texto);
   }
 }
-
