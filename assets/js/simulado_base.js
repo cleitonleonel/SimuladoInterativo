@@ -1,7 +1,7 @@
 const inputJson = document.getElementById("inputJson");
 const inputZip = document.getElementById("inputZip");
 const container = document.getElementById("container");
-const timerEl = document.getElementById("timer");
+const timerEl = null; // Removed from header
 const barra = document.getElementById("barraInterna");
 const audioCorreto = document.getElementById("audioCorreto");
 const audioErro = document.getElementById("audioErro");
@@ -32,7 +32,10 @@ function shuffle_secure(n) {
 function iniciarSimuladoReal() {
 	acertos = 0;
 	questaoAtual = 0;
+    const uploadArea = document.getElementById("uploadArea");
+    if (uploadArea) uploadArea.style.display = "none";
 	iniciarCronometro();
+    criarDots();
 	renderizarQuestaoReal();
 }
 
@@ -44,27 +47,71 @@ function iniciarSimulado() {
 	tempos = [];
 	resultadosPorArquivo = [];
 	resultado.innerHTML = "";
+    const uploadArea = document.getElementById("uploadArea");
+    if (uploadArea) uploadArea.style.display = "none";
 	carregarArquivo();
 }
 
 function iniciarCronometro() {
 	clearInterval(intervalo);
+    
+    let display = document.getElementById("floatingTimer");
+    if (!display) {
+        display = document.createElement("div");
+        display.id = "floatingTimer";
+        display.className = "floating-badge glass";
+        display.innerHTML = `<span>⏱️</span> <strong id="timerDisplay">00:00</strong>`;
+        document.body.appendChild(display);
+    }
+    const timerText = document.getElementById("timerDisplay");
+
 	intervalo = setInterval(() => {
 		if (tempoRestante <= 0) {
 			clearInterval(intervalo);
-			mostrarResultado("⏰ Tempo esgotado!");
+			mostrarResultadoReal("⏰ Tempo esgotado!");
 			return;
 		}
 		tempoRestante--;
 		const minutos = String(Math.floor(tempoRestante / 60)).padStart(2, "0");
 		const segundos = String(tempoRestante % 60).padStart(2, "0");
-		timerEl.textContent = `Tempo restante: ${minutos}:${segundos}`;
+		if (timerText) timerText.textContent = `${minutos}:${segundos}`;
 	}, 1000);
 }
 
 function atualizarBarraReal() {
 	const percentual = ((questaoAtual) / questoes.length) * 100;
 	barra.style.width = percentual + "%";
+    atualizarDots();
+}
+
+function criarDots() {
+    let dotsContainer = document.getElementById("statusDots");
+    if (!dotsContainer) {
+        dotsContainer = document.createElement("div");
+        dotsContainer.id = "statusDots";
+        dotsContainer.className = "dots-container";
+        const header = document.querySelector(".header-content") || document.querySelector(".global-header");
+        if (header) header.after(dotsContainer);
+    }
+    dotsContainer.innerHTML = "";
+    questoes.forEach((_, i) => {
+        const dot = document.createElement("div");
+        dot.className = "dot";
+        dotsContainer.appendChild(dot);
+    });
+}
+
+function atualizarDots() {
+    const dots = document.querySelectorAll(".dot");
+    dots.forEach((dot, i) => {
+        if (i < questaoAtual) {
+            // Se já passou, a cor já deve estar definida pelo clique anterior
+        } else if (i === questaoAtual) {
+            dot.classList.add("active");
+        } else {
+            dot.classList.remove("active");
+        }
+    });
 }
 
 function atualizarBarra() {
@@ -81,50 +128,63 @@ function renderizarQuestaoReal() {
 	
 	atualizarBarraReal();
 	const q = questoes[questaoAtual];
-	container.innerHTML = `
-      <div class="enunciado" style="text-align: left"><strong>${questaoAtual + 1})</strong> ${formatarTexto(q.enunciated)}</div>
-      <p style="text-align: left"><em>Arquivo: ${q._arquivo}</em></p>
+	const card = document.createElement("div");
+	card.className = "questao-card glass";
+	
+	card.innerHTML = `
+      <div class="enunciado"><strong>${questaoAtual + 1})</strong> ${formatarTexto(q.enunciated)}</div>
+      <p style="text-align: left; font-size: 0.8rem; color: var(--text-muted);"><em>Arquivo: ${q._arquivo}</em></p>
     `;
+	
+	const optionsContainer = document.createElement("div");
+	optionsContainer.className = "opcoes-container";
 	
 	q.options.forEach(op => {
 		const btn = document.createElement("button");
 		btn.className = "opcao";
-		//btn.innerHTML = renderOpcao(op);
 		renderConteudoComFlag(btn, op.text, op.isHTML);
 		btn.onclick = () => {
 			const correta = q.options.find(o => o.isCorrect);
-			const feedback = document.createElement("p");
+			const feedback = document.createElement("div");
 			const explicacao = document.createElement("div");
 			
+			const dots = document.querySelectorAll(".dot");
 			if (op.isCorrect) {
 				feedback.innerHTML = "✅ Correto!";
-				feedback.className = "correta";
+				feedback.className = "correta feedback";
 				audioCorreto.play();
 				acertos++;
+                if (dots[questaoAtual]) dots[questaoAtual].classList.add("correct");
 			} else {
 				feedback.innerHTML = "❌ Incorreto. A correta era: " + correta.text;
-				feedback.className = "incorreta";
+				feedback.className = "incorreta feedback";
 				audioErro.play();
+                if (dots[questaoAtual]) dots[questaoAtual].classList.add("wrong");
 			}
 			
 			explicacao.innerHTML = "📝 " + (op.feedback || "Sem justificativa.");
 			explicacao.className = "feedback";
 			
-			container.appendChild(feedback);
-			container.appendChild(explicacao);
+			card.appendChild(feedback);
+			card.appendChild(explicacao);
 			
-			Array.from(container.getElementsByTagName("button")).forEach(b => b.disabled = true);
+			Array.from(optionsContainer.getElementsByTagName("button")).forEach(b => b.disabled = true);
 			
 			const btnProx = document.createElement("button");
+			btnProx.className = "btn-premium btn-primary";
+			btnProx.style.marginTop = "1.5rem";
 			btnProx.textContent = "Próxima questão";
 			btnProx.onclick = () => {
 				questaoAtual++;
 				renderizarQuestaoReal();
 			};
-			container.appendChild(btnProx);
+			card.appendChild(btnProx);
 		};
-		container.appendChild(btn);
+		optionsContainer.appendChild(btn);
 	});
+    card.appendChild(optionsContainer);
+    container.innerHTML = "";
+    container.appendChild(card);
 }
 
 function renderizarQuestao() {
@@ -144,32 +204,37 @@ function renderizarQuestao() {
 	container.innerHTML = "";
 	
 	const qDiv = document.createElement("div");
-	qDiv.className = "questao";
+	qDiv.className = "questao-card glass";
 	
 	const titulo = document.createElement("h3");
+	titulo.style.fontSize = "0.9rem";
+	titulo.style.color = "var(--text-muted)";
 	titulo.innerHTML = `Arquivo: ${arquivos[arquivoAtual].name}`;
 	qDiv.appendChild(titulo);
 	
 	const enunciado = document.createElement("div");
+	enunciado.className = "enunciado";
 	enunciado.innerHTML = `<strong>${questaoAtual + 1})</strong> ${formatarTexto(q.enunciated)}`;
 	qDiv.appendChild(enunciado);
+    
+    const optionsContainer = document.createElement("div");
+	optionsContainer.className = "opcoes-container";
 	
 	q.options.forEach((opcao) => {
 		const btn = document.createElement("button");
 		btn.className = "opcao";
-		//btn.innerHTML = renderOpcao(opcao);
 		renderConteudoComFlag(btn, opcao.text, opcao.isHTML);
 		btn.onclick = () => {
 			const tempo = ((Date.now() - inicio) / 1000).toFixed(2);
 			tempos.push(tempo);
 			totalQuestoes++;
 			
-			const feedback = document.createElement("p");
+			const feedback = document.createElement("div");
 			const correta = q.options.find(opt => opt.isCorrect);
 			const acertou = opcao.isCorrect;
 			
 			feedback.innerHTML = acertou ? "✅ Correto!" : "❌ Incorreto.";
-			feedback.className = acertou ? "correta" : "incorreta";
+			feedback.className = acertou ? "correta feedback" : "incorreta feedback";
 			
 			const explicacao = document.createElement("div");
 			explicacao.innerHTML = "📝 " + (opcao.feedback || "");
@@ -177,7 +242,7 @@ function renderizarQuestao() {
 			
 			if (!acertou && correta) {
 				const corretaDiv = document.createElement("div");
-				corretaDiv.className = "correta";
+				corretaDiv.className = "correta feedback";
 				corretaDiv.style.marginTop = "10px";
 				corretaDiv.innerHTML = `✔️ Resposta correta: <br><strong>${correta.text}</strong>`;
 				audioErro.play();
@@ -192,46 +257,150 @@ function renderizarQuestao() {
 			
 			qDiv.appendChild(feedback);
 			qDiv.appendChild(explicacao);
-			Array.from(qDiv.getElementsByTagName("button")).forEach(b => b.disabled = true);
+			Array.from(optionsContainer.getElementsByTagName("button")).forEach(b => b.disabled = true);
 			
 			const proximo = document.createElement("button");
 			proximo.textContent = "Próxima questão";
+            proximo.className = "btn-premium btn-primary";
+            proximo.style.marginTop = "1.5rem";
 			proximo.onclick = () => {
 				questaoAtual++;
 				renderizarQuestao();
 			};
 			qDiv.appendChild(proximo);
 		};
-		qDiv.appendChild(btn);
+		optionsContainer.appendChild(btn);
 	});
 	
+	qDiv.appendChild(optionsContainer);
 	container.appendChild(qDiv);
 }
 
 function mostrarResultadoReal(msg) {
 	barra.style.width = "100%";
+    const porcentagem = Math.round((acertos / questoes.length) * 100);
+    let medalha = "🥉 Bronze";
+    let corMedalha = "#cd7f32";
+    
+    const totalTimeValue = (Date.now() - startTime) / 1000;
+    const minutes = Math.floor(totalTimeValue / 60);
+    const seconds = Math.floor(totalTimeValue % 60);
+
 	container.innerHTML = `
-      <h2>${msg}</h2>
-      <p>Você acertou <strong>${acertos}</strong> de <strong>${questoes.length}</strong> questões.</p>
-      <button onclick="window.location.reload()">🔁 Refazer simulado</button>
-      <button onclick="gerarPDF()">📄 Exportar resultado</button>
+      <div class="result-dashboard">
+        <section class="score-section glass" style="border-radius: 32px;">
+            <div class="score-ring">
+                <div class="score-value">${porcentagem}%</div>
+            </div>
+            <h2 style="color: var(--primary); font-size: 2rem; margin-bottom: 0.5rem;">Simulado Finalizado!</h2>
+            <p style="color: var(--text-muted);">Confira seu desempenho detalhado abaixo</p>
+        </section>
+
+        <div class="stat-grid">
+            <div class="stat-item">
+                <span class="stat-label">✔️ Acertos</span>
+                <div class="stat-value">${acertos} / ${questoes.length}</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">⏱️ Tempo Total</span>
+                <div class="stat-value">${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}</div>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem;">
+            <button class="btn-premium btn-primary" onclick="window.location.reload()">🔁 Novo Simulado</button>
+            <button class="btn-premium" onclick="gerarPDF()">📄 Relatório PDF</button>
+        </div>
+      </div>
     `;
+    const dotsContainer = document.getElementById("statusDots");
+    if (dotsContainer) dotsContainer.style.opacity = "0";
+    const timerBadge = document.getElementById("floatingTimer");
+    if (timerBadge) timerBadge.style.display = "none";
 }
 
 function gerarPDF() {
-	const resultado = document.getElementById("container").cloneNode(true);
-	resultado.querySelectorAll("button").forEach(b => b.remove());
-	resultado.querySelectorAll("audio").forEach(a => a.remove());
-	
+    const isDark = document.body.classList.contains('dark-mode');
+    const porcentagem = Math.round(( (acertos || acertosTotal) / (questoes.length || totalQuestoes) ) * 100);
+    const date = new Date().toLocaleDateString('pt-BR');
+    
+    // Create a clean "Reporting" container
+    const report = document.createElement("div");
+    report.style.padding = "40px";
+    report.style.fontFamily = "'Inter', sans-serif";
+    report.style.color = "#000"; // Always dark for PDF printing
+    report.style.background = "#fff";
+
+    report.innerHTML = `
+        <div style="border-bottom: 2px solid #6366f1; padding-bottom: 20px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h1 style="color: #6366f1; margin: 0; font-size: 24px;">Relatório de Desempenho</h1>
+                <p style="color: #666; margin: 5px 0 0 0;">Simulado Interativo</p>
+            </div>
+            <div style="text-align: right; color: #999; font-size: 12px;">
+                Data: ${date}
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 40px;">
+            <div style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center;">
+                <span style="font-size: 10px; color: #94a3b8; text-transform: uppercase;">Aproveitamento</span>
+                <div style="font-size: 24px; font-weight: 700; color: #6366f1;">${porcentagem}%</div>
+            </div>
+            <div style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center;">
+                <span style="font-size: 10px; color: #94a3b8; text-transform: uppercase;">Acertos Total</span>
+                <div style="font-size: 24px; font-weight: 700; color: #10b981;">${acertos || acertosTotal}</div>
+            </div>
+            <div style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center;">
+                <span style="font-size: 10px; color: #94a3b8; text-transform: uppercase;">Questões Respondidas</span>
+                <div style="font-size: 24px; font-weight: 700;">${questoes.length || totalQuestoes}</div>
+            </div>
+        </div>
+
+        <h3 style="border-left: 4px solid #6366f1; padding-left: 10px; margin-bottom: 20px;">Detalhamento por Matéria</h3>
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 40px;">
+            <thead>
+                <tr style="background: #f1f5f9;">
+                    <th style="padding: 12px; text-align: left; border: 1px solid #e2e8f0; font-size: 12px;">Arquivo / Matéria</th>
+                    <th style="padding: 12px; text-align: center; border: 1px solid #e2e8f0; font-size: 12px;">Acertos</th>
+                    <th style="padding: 12px; text-align: center; border: 1px solid #e2e8f0; font-size: 12px;">Total</th>
+                    <th style="padding: 12px; text-align: right; border: 1px solid #e2e8f0; font-size: 12px;">%</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${resultadosPorArquivo.map(r => `
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0; font-size: 12px;">${r.nome}</td>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0; text-align: center; font-size: 12px;">${r.acertos}</td>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0; text-align: center; font-size: 12px;">${r.total}</td>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0; text-align: right; font-size: 12px; font-weight: bold;">${Math.round((r.acertos/r.total)*100)}%</td>
+                    </tr>
+                `).join('')}
+                ${(questoes.length && !resultadosPorArquivo.length) ? `
+                    <tr>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0; font-size: 12px;">Simulado Aleatório</td>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0; text-align: center; font-size: 12px;">${acertos}</td>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0; text-align: center; font-size: 12px;">${questoes.length}</td>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0; text-align: right; font-size: 12px; font-weight: bold;">${porcentagem}%</td>
+                    </tr>
+                ` : ''}
+            </tbody>
+        </table>
+
+        <div style="margin-top: 60px; border-top: 1px solid #eee; padding-top: 20px; font-size: 10px; color: #999; text-align: center;">
+            Este relatório foi gerado automaticamente pelo sistema Simulado Interativo.
+        </div>
+    `;
+
 	const opt = {
 		margin: 0.5,
-		filename: `resultado_simulado_${new Date().toISOString().slice(0, 10)}.pdf`,
+		filename: `relatorio_simulado_${new Date().toISOString().slice(0, 10)}.pdf`,
 		image: {type: 'jpeg', quality: 0.98},
-		html2canvas: {scale: 2},
+		html2canvas: {scale: 2, useCORS: true},
 		jsPDF: {unit: 'in', format: 'a4', orientation: 'portrait'}
 	};
 	
-	html2pdf().from(resultado).set(opt).save();
+	html2pdf().from(report).set(opt).save();
 }
 
 function shuffle_all(questions) {
@@ -259,17 +428,70 @@ function carregarArquivo() {
 
 function mostrarResultado() {
 	container.innerHTML = "";
+    const porcentagemGlobal = Math.round((acertosTotal / totalQuestoes) * 100);
+    let medalha = "🥉 Bronze";
+    let corMedalha = "#cd7f32";
+    
+    if (porcentagemGlobal >= 90) {
+        medalha = "🏆 Ouro";
+        corMedalha = "#ffd700";
+    } else if (porcentagemGlobal >= 70) {
+        medalha = "🥈 Prata";
+        corMedalha = "#c0c0c0";
+    }
+
+    let fileCardsHTML = resultadosPorArquivo.map(r => {
+        const p = Math.round((r.acertos / r.total) * 100);
+        return `
+            <div class="stat-item glass" style="text-align: left; padding: 1.5rem; margin-bottom: 1rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                    <strong style="font-size: 0.9rem; color: var(--text-main);">${r.nome}</strong>
+                    <span style="font-weight: 700; color: ${p >= 70 ? 'var(--success)' : 'var(--error)'};">${p}%</span>
+                </div>
+                <div class="progress-container" style="height: 6px; background: rgba(0,0,0,0.05);">
+                    <div class="progress-bar" style="width: ${p}%; height: 100%; background: var(--primary);"></div>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;">
+                    ${r.acertos} acertos de ${r.total} questões
+                </div>
+            </div>
+        `;
+    }).join('');
+
 	resultado.innerHTML = `
-      <h2>Simulado Concluído</h2>
-      <p>Você acertou <strong>${acertosTotal}</strong> de <strong>${totalQuestoes}</strong> questões.</p>
-      <h3>Tempos de resposta:</h3>
-      <ul>${tempos.map((t, i) => `<li>Questão ${i + 1}: ${t}s</li>`).join('')}</ul>
-      <h3>Resultado por Arquivo:</h3>
-      ${resultadosPorArquivo.map(r =>
-		`<div class="result-arquivo"><strong>${r.nome}</strong>: ${r.acertos}/${r.total} acertos</div>`
-	).join('')}
-      <button onclick="window.location.reload()">🔁 Refazer simulado</button>
-      <button class="whatsapp" onclick="compartilharWhatsApp()">📤 Compartilhar no WhatsApp</button>
+      <div class="result-dashboard">
+        <section class="score-section glass" style="border-radius: 32px;">
+            <div class="score-ring" style="border-color: ${corMedalha}">
+                <div class="score-value">${porcentagemGlobal}%</div>
+            </div>
+            <h2 style="color: var(--primary); font-size: 2rem; margin-bottom: 0.5rem;">Desempenho Geral</h2>
+            <p style="color: var(--text-muted); font-size: 1.2rem;">Sua classificação: <strong>${medalha}</strong></p>
+        </section>
+
+        <div class="stat-grid">
+            <div class="stat-item">
+                <span class="stat-label">🎯 Total de Acertos</span>
+                <div class="stat-value">${acertosTotal} / ${totalQuestoes}</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">📄 Arquivos Processados</span>
+                <div class="stat-value">${resultadosPorArquivo.length}</div>
+            </div>
+        </div>
+
+        <h4 style="text-align: left; margin: 1.5rem 0 1rem; color: var(--text-secondary); font-size: 1rem; padding-left: 0.5rem;">Desempenho por Matéria</h4>
+        <div class="file-stats-scroll" style="max-height: 400px; overflow-y: auto; padding: 0.5rem;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+                ${fileCardsHTML}
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+            <button class="btn-premium btn-primary" onclick="window.location.reload()">🔁 Novo Simulado</button>
+            <button class="btn-premium" onclick="gerarPDF()">📄 Relatório Profissional</button>
+            <button class="btn-premium" style="background: #25d366; color: white; border-color: #25d366;" onclick="compartilharWhatsApp()">📤 WhatsApp</button>
+        </div>
+      </div>
     `;
 	barra.style.width = "100%";
 }

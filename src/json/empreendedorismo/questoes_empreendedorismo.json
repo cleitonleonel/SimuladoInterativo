@@ -1,0 +1,114 @@
+{
+  "content": {
+    "questions": [
+      {
+        "enunciated": "O que melhor define o conceito de empreendedorismo?",
+        "options": [
+          {"text": "Gerenciar eficientemente uma empresa já estabelecida.", "isCorrect": false, "feedback": "Incorreto. Gerenciar uma empresa existente é o papel do administrador, embora empreendedores também administrem."},
+          {"text": "Identificar oportunidades, inovar e assumir riscos calculados para criar um novo negócio ou valor.", "isCorrect": true, "feedback": "Correto! O empreendedorismo envolve iniciativa, inovação, risco e criação de valor."},
+          {"text": "Apenas ter uma ideia brilhante para um novo produto.", "isCorrect": false, "feedback": "Incorreto. Ter uma ideia é o ponto de partida, mas o empreendedorismo exige ação, desenvolvimento e assunção de riscos."},
+          {"text": "Trabalhar como profissional autônomo ou freelancer.", "isCorrect": false, "feedback": "Incorreto. Embora um autônomo possa ser empreendedor, o termo abrange a criação de negócios com potencial de crescimento."}
+        ]
+      },
+      {
+        "enunciated": "Qual característica é frequentemente associada ao perfil do empreendedor ao lidar com a incerteza e a possibilidade de fracasso?",
+        "options": [
+          {"text": "Aversão completa a qualquer tipo de risco.", "isCorrect": false, "feedback": "Incorreto. Empreendedores assumem riscos, mas de forma calculada e gerenciada."},
+          {"text": "Foco exclusivo em seguir planos rigidamente definidos.", "isCorrect": false, "feedback": "Incorreto. Empreendedores precisam ser flexíveis e adaptáveis às mudanças e incertezas."},
+          {"text": "Perseverança, resiliência e capacidade de aprender com os erros.", "isCorrect": true, "feedback": "Correto! A capacidade de persistir diante dos desafios e se recuperar de falhas é crucial."},
+          {"text": "Busca por estabilidade e rotina no trabalho.", "isCorrect": false, "feedback": "Incorreto. O ambiente empreendedor é tipicamente dinâmico e instável, especialmente no início."}
+        ]
+      },
+      {
+        "enunciated": "O empreendedorismo que surge como alternativa à falta de emprego formal, muitas vezes com negócios de baixa complexidade, é chamado de:",
+        "options": [
+          {"text": "Empreendedorismo de Oportunidade", "isCorrect": false, "feedback": "Incorreto. Este tipo surge da identificação de uma clara oportunidade de mercado, não primariamente pela falta de emprego."},
+          {"text": "Empreendedorismo Social", "isCorrect": false, "feedback": "Incorreto. O empreendedorismo social tem como foco principal a geração de impacto social positivo."},
+          {"text": "Empreendedorismo por Necessidade", "isCorrect": true, "feedback": "Correto! Este tipo de empreendedorismo é impulsionado pela falta de outras opções de renda."},
+          {"text": "Intraempreendedorismo", "isCorrect": false, "feedback": "Incorreto. Intraempreendedorismo ocorre quando se empreende dentro de uma organização já existente."}
+        ]
+      },
+      {
+        "enunciated": "Qual é a principal finalidade de um Plano de Negócios (Business Plan)?",
+        "options": [
+          {"text": "Servir apenas como documento para obter financiamento bancário.", "isCorrect": false, "feedback": "Incorreto. Embora seja útil para buscar financiamento, essa não é sua única nem principal finalidade."},
+          {"text": "Descrever detalhadamente a história do empreendedor.", "isCorrect": false, "feedback": "Incorreto. O foco do plano é o negócio em si, não a biografia do fundador."},
+          {"text": "Analisar a viabilidade da ideia de negócio, planejar estratégias e servir como guia para a gestão.", "isCorrect": true, "feedback": "Correto! O plano ajuda a estruturar a ideia, avaliar riscos, definir estratégias e comunicar o projeto."},
+          {"text": "Garantir legalmente a propriedade intelectual da ideia.", "isCorrect": false, "feedback": "Incorreto. A proteção da propriedade intelectual requer registros específicos (patentes, marcas), não apenas o plano de negócios."}
+        ]
+      },
+      {
+        "enunciated": "Investidores que aplicam capital em startups em estágio inicial (early stage), geralmente pessoas físicas com experiência de mercado, que também podem oferecer mentoria, são conhecidos como:",
+        "options": [
+          {"text": "Fundos de Venture Capital", "isCorrect": false, "feedback": "Incorreto. Venture Capital geralmente investe valores maiores em fases posteriores (startups mais maduras)."},
+          {"text": "Investidores-Anjo (Angel Investors)", "isCorrect": true, "feedback": "Correto! Investidores-anjo são cruciais no ecossistema para apoiar negócios nascentes."},
+          {"text": "Bancos de Desenvolvimento (como BNDES)", "isCorrect": false, "feedback": "Incorreto. Bancos de desenvolvimento oferecem linhas de crédito e financiamento, não investimento em troca de participação (equity) tipicamente anjo."},
+          {"text": "Plataformas de Crowdfunding", "isCorrect": false, "feedback": "Incorreto. Crowdfunding é financiamento coletivo, vindo de muitas pessoas em pequenas quantias, não um investidor individual."}
+        ]
+      },
+      {
+        "enunciated": "O que significa o conceito de 'Produto Mínimo Viável' (MVP - Minimum Viable Product)?",
+        "options": [
+          {"text": "A versão final e completa do produto, pronta para escala massiva.", "isCorrect": false, "feedback": "Incorreto. O MVP é uma versão inicial, não a final."},
+          {"text": "Um protótipo detalhado que não será mostrado aos clientes.", "isCorrect": false, "feedback": "Incorreto. O objetivo do MVP é justamente ser testado por clientes reais para obter feedback."},
+          {"text": "A versão mais simples de um produto que permite coletar o máximo de aprendizado validado sobre os clientes com o mínimo esforço.", "isCorrect": true, "feedback": "Correto! O foco do MVP é testar hipóteses de negócio rapidamente e com poucos recursos."},
+          {"text": "O produto mais barato que a empresa consegue produzir.", "isCorrect": false, "feedback": "Incorreto. O foco é no aprendizado e validação, não apenas no custo de produção."}
+        ]
+      },
+      {
+        "enunciated": "A metodologia 'Lean Startup', proposta por Eric Ries, enfatiza um ciclo iterativo para o desenvolvimento de novos negócios. Qual é este ciclo?",
+        "options": [
+          {"text": "Pesquisar - Desenvolver - Vender", "isCorrect": false, "feedback": "Incorreto. Embora essas etapas ocorram, não representam o ciclo central da metodologia Lean."},
+          {"text": "Construir - Medir - Aprender (Build - Measure - Learn)", "isCorrect": true, "feedback": "Correto! Este ciclo rápido de feedback permite ajustar o produto e o modelo de negócio com base em dados reais."},
+          {"text": "Planejar - Organizar - Dirigir - Controlar", "isCorrect": false, "feedback": "Incorreto. Este é o ciclo administrativo clássico (PODC), não o ciclo Lean Startup."},
+          {"text": "Idear - Prototipar - Patentear - Lançar", "isCorrect": false, "feedback": "Incorreto. Essas são etapas possíveis, mas não o ciclo de aprendizado iterativo do Lean Startup."}
+        ]
+      },
+      {
+        "enunciated": "Quando uma inovação estabelece um novo mercado ou rede de valor, eventualmente deslocando tecnologias ou líderes de mercado anteriores, ela é classificada como:",
+        "options": [
+          {"text": "Inovação Incremental", "isCorrect": false, "feedback": "Incorreto. Inovação incremental refere-se a pequenas melhorias em produtos ou serviços existentes."},
+          {"text": "Inovação de Sustentação", "isCorrect": false, "feedback": "Incorreto. Inovação de sustentação melhora produtos existentes para os clientes atuais do mercado."},
+          {"text": "Inovação Disruptiva", "isCorrect": true, "feedback": "Correto! A disrupção muda fundamentalmente a dinâmica do mercado, muitas vezes começando por nichos negligenciados."},
+          {"text": "Inovação de Marketing", "isCorrect": false, "feedback": "Incorreto. Inovação de marketing envolve novas formas de promover ou vender um produto, mas não define a disrupção."}
+        ]
+      },
+      {
+        "enunciated": "O fenômeno em que funcionários de uma empresa existente agem como empreendedores, identificando oportunidades e desenvolvendo novos projetos para a própria organização, é conhecido como:",
+        "options": [
+          {"text": "Terceirização (Outsourcing)", "isCorrect": false, "feedback": "Incorreto. Terceirização é contratar outra empresa para realizar atividades."},
+          {"text": "Intraempreendedorismo (ou Empreendedorismo Corporativo)", "isCorrect": true, "feedback": "Correto! É o espírito empreendedor aplicado dentro dos limites de uma organização estabelecida."},
+          {"text": "Franchising (Franquia)", "isCorrect": false, "feedback": "Incorreto. Franchising é um modelo de expansão onde se licencia uma marca e modelo de negócio."},
+          {"text": "Joint Venture", "isCorrect": false, "feedback": "Incorreto. Joint Venture é uma parceria entre duas ou mais empresas para um projeto específico."}
+        ]
+      },
+      {
+        "enunciated": "Qual a importância da validação de uma ideia de negócio antes de investir pesadamente nela?",
+        "options": [
+          {"text": "Nenhuma, pois boas ideias sempre dão certo.", "isCorrect": false, "feedback": "Incorreto. Muitas ideias que parecem boas na teoria falham na prática por falta de validação."},
+          {"text": "Apenas para cumprir uma formalidade exigida por investidores.", "isCorrect": false, "feedback": "Incorreto. A validação é crucial para o próprio empreendedor, não apenas para investidores."},
+          {"text": "Para confirmar se existe um mercado real para a solução proposta e se os clientes estão dispostos a pagar por ela, reduzindo o risco de fracasso.", "isCorrect": true, "feedback": "Correto! Validar testa as hipóteses fundamentais do negócio com o mercado real."},
+          {"text": "Para definir o preço final do produto ou serviço.", "isCorrect": false, "feedback": "Incorreto. A definição do preço é uma etapa posterior, informada pela validação, mas não seu objetivo principal."}
+        ]
+      },
+      {
+        "enunciated": "O que é 'Bootstrapping' no contexto de financiamento de startups?",
+        "options": [
+          {"text": "Receber um grande investimento de um fundo de Venture Capital.", "isCorrect": false, "feedback": "Incorreto. Bootstrapping é o oposto de depender de grandes investimentos externos iniciais."},
+          {"text": "Iniciar e crescer um negócio utilizando apenas recursos próprios ou o mínimo de capital externo possível.", "isCorrect": true, "feedback": "Correto! Bootstrapping envolve usar a criatividade e os próprios recursos para financiar o início da operação."},
+          {"text": "Obter um empréstimo bancário com altas taxas de juros.", "isCorrect": false, "feedback": "Incorreto. Bootstrapping busca evitar ou minimizar o endividamento externo."},
+          {"text": "Vender ações da empresa na bolsa de valores (IPO).", "isCorrect": false, "feedback": "Incorreto. IPO ocorre em fases muito mais avançadas de maturidade da empresa."}
+        ]
+      },
+      {
+        "enunciated": "Qual o objetivo principal da realização de uma pesquisa de mercado para um empreendedor?",
+        "options": [
+          {"text": "Apenas para descobrir o que os concorrentes estão fazendo.", "isCorrect": false, "feedback": "Incorreto. Análise da concorrência é parte da pesquisa, mas não seu único objetivo."},
+          {"text": "Entender as necessidades e desejos dos clientes potenciais, o tamanho do mercado, as tendências e a concorrência para tomar decisões mais informadas.", "isCorrect": true, "feedback": "Correto! A pesquisa de mercado fornece dados essenciais para o planejamento e estratégia."},
+          {"text": "Convencer os investidores de que a ideia é boa, mesmo sem dados concretos.", "isCorrect": false, "feedback": "Incorreto. A pesquisa busca dados concretos; investidores valorizam informações baseadas em evidências."},
+          {"text": "Criar materiais de marketing e publicidade.", "isCorrect": false, "feedback": "Incorreto. A pesquisa de mercado informa a criação do marketing, mas não é seu objetivo primário."}
+        ]
+      }
+    ]
+  }
+}

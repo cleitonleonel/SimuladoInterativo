@@ -1,0 +1,111 @@
+{
+  "content": {
+    "questions": [
+      {
+        "enunciated": "O que a função `len()` retorna em Python?",
+        "options": [
+          {
+            "text": "O valor máximo de uma variável",
+            "isCorrect": false,
+            "feedback": "Errado. `len()` não está relacionada a valores máximos."
+          },
+          {
+            "text": "O tipo de um objeto",
+            "isCorrect": false,
+            "feedback": "Errado. Para isso usamos a função `type()`."
+          },
+          {
+            "text": "O comprimento (número de elementos) de um objeto",
+            "isCorrect": true,
+            "feedback": "Correto! `len()` retorna o número de elementos de listas, strings, tuplas, etc."
+          }
+        ]
+      },
+      {
+        "enunciated": "Qual estrutura condicional é usada para tomar decisões em Python?",
+        "options": [
+          {
+            "text": "`if`, `elif`, `else`",
+            "isCorrect": true,
+            "feedback": "Correto! Essas são as estruturas condicionais em Python."
+          },
+          {
+            "text": "`if`, `else if`, `otherwise`",
+            "isCorrect": false,
+            "feedback": "Errado. Essa estrutura é comum em outras linguagens como JavaScript ou C."
+          },
+          {
+            "text": "`cond`, `elseif`, `endif`",
+            "isCorrect": false,
+            "feedback": "Errado. Essa forma é usada em pseudocódigos ou outras linguagens."
+          }
+        ]
+      },
+      {
+        "enunciated": "Qual comando é usado para repetir uma ação enquanto uma condição for verdadeira?",
+        "options": [
+          {
+            "text": "`for`",
+            "isCorrect": false,
+            "feedback": "Errado. `for` repete para cada item de uma sequência, não enquanto uma condição é verdadeira."
+          },
+          {
+            "text": "`while`",
+            "isCorrect": true,
+            "feedback": "Correto! `while` repete o bloco de código enquanto a condição for verdadeira."
+          },
+          {
+            "text": "`loop until`",
+            "isCorrect": false,
+            "feedback": "Errado. Essa não é uma estrutura válida em Python."
+          }
+        ]
+      },
+      {
+        "enunciated": "Como se comenta uma única linha de código em Python?",
+        "options": [
+          {
+            "text": "Usando `<!-- comentário -->`",
+            "isCorrect": false,
+            "feedback": "Errado. Essa é a sintaxe de comentário em HTML."
+          },
+          {
+            "text": "Usando `# comentário`",
+            "isCorrect": true,
+            "feedback": "Correto! O símbolo `#` é usado para comentários de linha única em Python."
+          },
+          {
+            "text": "Usando `// comentário`",
+            "isCorrect": false,
+            "feedback": "Errado. Essa sintaxe é usada em linguagens como C++ ou JavaScript."
+          }
+        ]
+      },
+      {
+        "enunciated": "Qual das opções abaixo representa um dicionário em Python?",
+        "options": [
+          {
+            "text": "`{'nome': 'Ana', 'idade': 25}`",
+            "isCorrect": true,
+            "feedback": "Correto! Dicionários usam pares chave-valor com chaves entre aspas e separados por dois-pontos."
+          },
+          {
+            "text": "`['nome', 'Ana', 'idade', 25]`",
+            "isCorrect": false,
+            "feedback": "Errado. Essa é a representação de uma lista."
+          },
+          {
+            "text": "`('nome', 'Ana', 'idade', 25)`",
+            "isCorrect": false,
+            "feedback": "Errado. Isso representa uma tupla."
+          },
+          {
+            "text": "`<nome: Ana, idade: 25>`",
+            "isCorrect": false,
+            "feedback": "Errado. Essa sintaxe não existe em Python."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,447 @@
+{
+  "content": {
+    "questions": [
+      {
+        "enunciated": "Qual conceito administrativo se refere a 'fazer certo as coisas', ou seja, utilizar os recursos da melhor maneira possível?",
+        "options": [
+          {"text": "Efetividade", "isCorrect": false, "feedback": "Incorreto. Efetividade significa 'fazer as coisas certas', ou seja, alcançar os objetivos."},
+          {"text": "Eficiência", "isCorrect": true, "feedback": "Correto! Eficiência está relacionada ao uso otimizado dos recursos (meios)."},
+          {"text": "Produtividade", "isCorrect": false, "feedback": "Incorreto. Produtividade é a relação entre o resultado obtido e os recursos utilizados."},
+          {"text": "Lucratividade", "isCorrect": false, "feedback": "Incorreto. Lucratividade é um resultado financeiro, uma consequência da gestão."}
+        ]
+      },
+      {
+        "enunciated": "Quais são as quatro funções clássicas da administração propostas por Henri Fayol?",
+        "options": [
+          {"text": "Planejar, Organizar, Dirigir, Controlar", "isCorrect": true, "feedback": "Correto! Estas são as funções do processo administrativo (PODC) definidas por Fayol."},
+          {"text": "Analisar, Executar, Avaliar, Corrigir", "isCorrect": false, "feedback": "Incorreto. Embora sejam ações administrativas, não correspondem à classificação de Fayol."},
+          {"text": "Marketing, Finanças, Produção, RH", "isCorrect": false, "feedback": "Incorreto. Estas são áreas funcionais de uma organização, não as funções administrativas."},
+          {"text": "Liderar, Motivar, Comunicar, Negociar", "isCorrect": false, "feedback": "Incorreto. Estas são habilidades importantes da função 'Dirigir', mas não as quatro funções principais."}
+        ]
+      },
+      {
+        "enunciated": "Frederick Taylor é considerado o pai de qual abordagem da administração?",
+        "options": [
+          {"text": "Teoria Clássica", "isCorrect": false, "feedback": "Incorreto. A Teoria Clássica é mais associada a Fayol, focando na estrutura organizacional."},
+          {"text": "Administração Científica", "isCorrect": true, "feedback": "Correto! Taylor focou na racionalização do trabalho no nível operacional (estudo de tempos e movimentos)."},
+          {"text": "Teoria das Relações Humanas", "isCorrect": false, "feedback": "Incorreto. Esta abordagem surgiu com Elton Mayo e os estudos de Hawthorne."},
+          {"text": "Teoria da Burocracia", "isCorrect": false, "feedback": "Incorreto. A Teoria da Burocracia foi desenvolvida por Max Weber."}
+        ]
+      },
+      {
+        "enunciated": "A Teoria da Burocracia, de Max Weber, descreve um modelo organizacional ideal baseado em:",
+        "options": [
+          {"text": "Relações informais e flexibilidade", "isCorrect": false, "feedback": "Incorreto. Weber enfatizava a formalidade e a rigidez das regras."},
+          {"text": "Racionalidade, regras formais e hierarquia clara", "isCorrect": true, "feedback": "Correto! Estes são os pilares da burocracia Weberiana, visando a eficiência pela previsibilidade."},
+          {"text": "Ênfase nas pessoas e suas motivações", "isCorrect": false, "feedback": "Incorreto. Esta é a ênfase da Escola das Relações Humanas e Comportamental."},
+          {"text": "Adaptação contínua ao ambiente externo", "isCorrect": false, "feedback": "Incorreto. A burocracia clássica é vista como um sistema fechado, com dificuldade de adaptação."}
+        ]
+      },
+      {
+        "enunciated": "Qual escola administrativa surgiu a partir dos experimentos de Hawthorne, coordenados por Elton Mayo?",
+        "options": [
+          {"text": "Escola Clássica", "isCorrect": false, "feedback": "Incorreto. A Escola Clássica (Taylor e Fayol) precedeu esses experimentos."},
+          {"text": "Escola das Relações Humanas", "isCorrect": true, "feedback": "Correto! Os experimentos de Hawthorne revelaram a importância dos fatores sociais e psicológicos no trabalho."},
+          {"text": "Escola Comportamental (Behaviorista)", "isCorrect": false, "feedback": "Incorreto. A Escola Comportamental é uma evolução das Relações Humanas, incorporando a motivação (Maslow, Herzberg)."},
+          {"text": "Teoria de Sistemas", "isCorrect": false, "feedback": "Incorreto. A Teoria de Sistemas vê a organização como um sistema aberto em interação com o ambiente."}
+        ]
+      },
+      {
+        "enunciated": "Na hierarquia das necessidades de Maslow, qual é a necessidade mais básica?",
+        "options": [
+          {"text": "Segurança", "isCorrect": false, "feedback": "Incorreto. As necessidades de segurança vêm após as fisiológicas."},
+          {"text": "Sociais (Afiliação)", "isCorrect": false, "feedback": "Incorreto. As necessidades sociais vêm após as de segurança."},
+          {"text": "Fisiológicas", "isCorrect": true, "feedback": "Correto! As necessidades fisiológicas (comida, água, abrigo) formam a base da pirâmide."},
+          {"text": "Estima", "isCorrect": false, "feedback": "Incorreto. As necessidades de estima vêm após as sociais."}
+        ]
+      },
+      {
+        "enunciated": "A Teoria dos Dois Fatores de Herzberg classifica os fatores que influenciam a satisfação no trabalho em:",
+        "options": [
+          {"text": "Fatores Internos e Externos", "isCorrect": false, "feedback": "Incorreto. Essa não é a terminologia de Herzberg."},
+          {"text": "Fatores Motivacionais e Higiênicos", "isCorrect": true, "feedback": "Correto! Fatores Higiênicos evitam insatisfação (salário, condições), Motivacionais geram satisfação (reconhecimento, crescimento)."},
+          {"text": "Fatores de Desempenho e Recompensa", "isCorrect": false, "feedback": "Incorreto. Essa não é a classificação de Herzberg."},
+          {"text": "Fatores Pessoais e Organizacionais", "isCorrect": false, "feedback": "Incorreto. Essa não é a terminologia específica da teoria de Herzberg."}
+        ]
+      },
+      {
+        "enunciated": "Douglas McGregor propôs duas visões contrastantes sobre a natureza humana em relação ao trabalho, conhecidas como:",
+        "options": [
+          {"text": "Teoria Alfa e Beta", "isCorrect": false, "feedback": "Incorreto. Essa não é a denominação usada por McGregor."},
+          {"text": "Teoria X e Teoria Y", "isCorrect": true, "feedback": "Correto! Teoria X (visão negativa, pessoas evitam trabalho) e Teoria Y (visão positiva, pessoas são proativas)."},
+          {"text": "Teoria A e Teoria B", "isCorrect": false, "feedback": "Incorreto. Essa não é a denominação usada por McGregor."},
+          {"text": "Teoria Hard e Soft", "isCorrect": false, "feedback": "Incorreto. Essa não é a denominação usada por McGregor."}
+        ]
+      },
+      {
+        "enunciated": "A abordagem que vê a organização como um conjunto de partes interdependentes que interagem entre si e com o ambiente externo é a:",
+        "options": [
+          {"text": "Teoria Contingencial", "isCorrect": false, "feedback": "Incorreto. A Teoria Contingencial foca na adaptação da estrutura à situação ('não há uma única melhor maneira')."},
+          {"text": "Teoria de Sistemas", "isCorrect": true, "feedback": "Correto! A Teoria de Sistemas introduziu conceitos como inputs, processamento, outputs, feedback e ambiente."},
+          {"text": "Teoria Comportamental", "isCorrect": false, "feedback": "Incorreto. A Teoria Comportamental foca no comportamento humano e na motivação."},
+          {"text": "Administração por Objetivos (APO)", "isCorrect": false, "feedback": "Incorreto. A APO é uma técnica de planejamento e avaliação focada em resultados."}
+        ]
+      },
+      {
+        "enunciated": "A Teoria Contingencial da Administração defende que:",
+        "options": [
+          {"text": "Existe uma única maneira ideal ('the one best way') de administrar qualquer organização.", "isCorrect": false, "feedback": "Incorreto. Isso é o oposto do pensamento contingencial; era a ideia da Adm. Científica."},
+          {"text": "As práticas administrativas eficazes dependem das características da situação (contingências).", "isCorrect": true, "feedback": "Correto! A estrutura e as ações devem se adaptar à tecnologia, ao ambiente, ao tamanho, etc."},
+          {"text": "O foco principal deve ser sempre nas relações humanas e na motivação dos funcionários.", "isCorrect": false, "feedback": "Incorreto. Embora importante, não é o foco único da Teoria Contingencial."},
+          {"text": "As organizações devem ser vistas como sistemas fechados para manter a estabilidade.", "isCorrect": false, "feedback": "Incorreto. A Teoria Contingencial baseia-se na ideia de sistemas abertos que interagem com o ambiente."}
+        ]
+      },
+      {
+        "enunciated": "O processo de definir objetivos e os meios para alcançá-los corresponde a qual função administrativa?",
+        "options": [
+          {"text": "Organização", "isCorrect": false, "feedback": "Incorreto. Organização envolve alocar recursos e definir a estrutura."},
+          {"text": "Direção", "isCorrect": false, "feedback": "Incorreto. Direção envolve liderar, motivar e comunicar."},
+          {"text": "Controle", "isCorrect": false, "feedback": "Incorreto. Controle envolve monitorar o desempenho e corrigir desvios."},
+          {"text": "Planejamento", "isCorrect": true, "feedback": "Correto! Planejamento é a função que estabelece o rumo e como chegar lá."}
+        ]
+      },
+      {
+        "enunciated": "Planos que definem o rumo geral da organização, sua visão e missão, geralmente de longo prazo, são chamados de:",
+        "options": [
+          {"text": "Planos Operacionais", "isCorrect": false, "feedback": "Incorreto. Planos operacionais são de curto prazo e detalham tarefas específicas."},
+          {"text": "Planos Táticos", "isCorrect": false, "feedback": "Incorreto. Planos táticos traduzem os planos estratégicos para níveis departamentais (médio prazo)."},
+          {"text": "Planos Estratégicos", "isCorrect": true, "feedback": "Correto! Planos estratégicos envolvem a organização como um todo e sua relação com o ambiente."},
+          {"text": "Planos Contingenciais", "isCorrect": false, "feedback": "Incorreto. Planos contingenciais são planos alternativos para lidar com eventos inesperados."}
+        ]
+      },
+      {
+        "enunciated": "A análise SWOT é uma ferramenta de planejamento estratégico que avalia:",
+        "options": [
+          {"text": "Somente fatores internos da organização.", "isCorrect": false, "feedback": "Incorreto. SWOT avalia fatores internos (Forças e Fraquezas) e externos."},
+          {"text": "Somente fatores externos do ambiente.", "isCorrect": false, "feedback": "Incorreto. SWOT avalia fatores externos (Oportunidades e Ameaças) e internos."},
+          {"text": "Forças, Fraquezas (ambiente interno), Oportunidades e Ameaças (ambiente externo).", "isCorrect": true, "feedback": "Correto! SWOT é o acrônimo para Strengths, Weaknesses, Opportunities, Threats."},
+          {"text": "Objetivos, Metas, Estratégias e Táticas.", "isCorrect": false, "feedback": "Incorreto. SWOT é uma análise que *apoia* a definição desses elementos, mas não os avalia diretamente."}
+        ]
+      },
+      {
+        "enunciated": "A função administrativa que envolve a alocação de recursos, definição de tarefas, agrupamento de atividades e estabelecimento de relações de autoridade é a:",
+        "options": [
+          {"text": "Planejamento", "isCorrect": false, "feedback": "Incorreto. Planejamento define objetivos e como alcançá-los."},
+          {"text": "Organização", "isCorrect": true, "feedback": "Correto! Organizar é estruturar a empresa para realizar o planejado."},
+          {"text": "Direção", "isCorrect": false, "feedback": "Incorreto. Direção envolve influenciar pessoas."},
+          {"text": "Controle", "isCorrect": false, "feedback": "Incorreto. Controle monitora e corrige o desempenho."}
+        ]
+      },
+      {
+        "enunciated": "Uma estrutura organizacional onde os funcionários se reportam a dois chefes (um gerente funcional e um gerente de projeto/produto) é chamada de:",
+        "options": [
+          {"text": "Estrutura Funcional", "isCorrect": false, "feedback": "Incorreto. Na estrutura funcional, a subordinação é única dentro de cada departamento (Marketing, Finanças, etc.)."},
+          {"text": "Estrutura Divisional", "isCorrect": false, "feedback": "Incorreto. A estrutura divisional agrupa por produto, serviço ou região, geralmente com comando único por divisão."},
+          {"text": "Estrutura Matricial", "isCorrect": true, "feedback": "Correto! A dupla subordinação é a característica principal da estrutura matricial."},
+          {"text": "Estrutura Linear", "isCorrect": false, "feedback": "Incorreto. A estrutura linear é a mais simples, com hierarquia direta e comando único (militar)."}
+        ]
+      },
+      {
+        "enunciated": "O processo de atribuir tarefas e autoridade a subordinados é conhecido como:",
+        "options": [
+          {"text": "Centralização", "isCorrect": false, "feedback": "Incorreto. Centralização concentra a autoridade no topo."},
+          {"text": "Delegação", "isCorrect": true, "feedback": "Correto! Delegação é transferir autoridade e responsabilidade para níveis inferiores."},
+          {"text": "Departamentalização", "isCorrect": false, "feedback": "Incorreto. Departamentalização é o agrupamento de atividades."},
+          {"text": "Amplitude de controle", "isCorrect": false, "feedback": "Incorreto. Amplitude de controle refere-se ao número de subordinados que um gestor pode supervisionar eficazmente."}
+        ]
+      },
+      {
+        "enunciated": "A função administrativa que envolve influenciar, motivar e comunicar-se com as pessoas para que realizem seus trabalhos é a:",
+        "options": [
+          {"text": "Planejamento", "isCorrect": false, "feedback": "Incorreto. Planejamento define objetivos."},
+          {"text": "Organização", "isCorrect": false, "feedback": "Incorreto. Organização estrutura os recursos."},
+          {"text": "Direção (ou Liderança)", "isCorrect": true, "feedback": "Correto! Direção é a função focada nas pessoas e na execução das tarefas através delas."},
+          {"text": "Controle", "isCorrect": false, "feedback": "Incorreto. Controle monitora o progresso."}
+        ]
+      },
+      {
+        "enunciated": "Um estilo de liderança onde o líder toma todas as decisões sem consultar a equipe é chamado de:",
+        "options": [
+          {"text": "Liderança Democrática", "isCorrect": false, "feedback": "Incorreto. Na liderança democrática, o líder envolve a equipe nas decisões."},
+          {"text": "Liderança Liberal (Laissez-faire)", "isCorrect": false, "feedback": "Incorreto. Na liderança liberal, o líder dá total liberdade à equipe."},
+          {"text": "Liderança Autocrática", "isCorrect": true, "feedback": "Correto! O líder autocrático centraliza o poder e a tomada de decisão."},
+          {"text": "Liderança Situacional", "isCorrect": false, "feedback": "Incorreto. A liderança situacional adapta o estilo à maturidade da equipe e à tarefa."}
+        ]
+      },
+      {
+        "enunciated": "Qual é o último passo do processo de controle administrativo?",
+        "options": [
+          {"text": "Estabelecer padrões de desempenho", "isCorrect": false, "feedback": "Incorreto. Este é geralmente o primeiro passo."},
+          {"text": "Medir o desempenho atual", "isCorrect": false, "feedback": "Incorreto. Este é o segundo passo."},
+          {"text": "Comparar o desempenho com os padrões", "isCorrect": false, "feedback": "Incorreto. Este é o terceiro passo."},
+          {"text": "Tomar ações corretivas (se necessário)", "isCorrect": true, "feedback": "Correto! Após comparar o desempenho com o padrão, a ação corretiva fecha o ciclo."}
+        ]
+      },
+      {
+        "enunciated": "Decisões rotineiras e repetitivas, para as quais já existem procedimentos estabelecidos, são chamadas de:",
+        "options": [
+          {"text": "Decisões Estratégicas", "isCorrect": false, "feedback": "Incorreto. Decisões estratégicas são complexas, não rotineiras e de longo prazo."},
+          {"text": "Decisões Não Programadas", "isCorrect": false, "feedback": "Incorreto. Decisões não programadas são para situações novas e não estruturadas."},
+          {"text": "Decisões Programadas", "isCorrect": true, "feedback": "Correto! Decisões programadas seguem regras e procedimentos predefinidos."},
+          {"text": "Decisões Táticas", "isCorrect": false, "feedback": "Incorreto. Decisões táticas, embora possam ter alguma estrutura, não são necessariamente rotineiras como as programadas."}
+        ]
+      },
+      {
+        "enunciated": "O conjunto de valores, crenças, normas e comportamentos compartilhados pelos membros de uma organização é conhecido como:",
+        "options": [
+          {"text": "Estrutura Organizacional", "isCorrect": false, "feedback": "Incorreto. Estrutura refere-se à disposição formal de cargos e departamentos."},
+          {"text": "Cultura Organizacional", "isCorrect": true, "feedback": "Correto! A cultura é a 'personalidade' da organização."},
+          {"text": "Clima Organizacional", "isCorrect": false, "feedback": "Incorreto. Clima é a percepção momentânea dos funcionários sobre o ambiente de trabalho."},
+          {"text": "Ambiente Externo", "isCorrect": false, "feedback": "Incorreto. Ambiente externo são os fatores fora da organização que a influenciam."}
+        ]
+      },
+      {
+        "enunciated": "Grupos ou indivíduos que são afetados pelas ou que podem afetar as ações de uma organização (clientes, fornecedores, funcionários, governo, etc.) são chamados de:",
+        "options": [
+          {"text": "Acionistas (Shareholders)", "isCorrect": false, "feedback": "Incorreto. Acionistas são um tipo específico de stakeholder (proprietários)."},
+          {"text": "Concorrentes", "isCorrect": false, "feedback": "Incorreto. Concorrentes são parte do ambiente externo, um tipo de stakeholder, mas o termo geral é outro."},
+          {"text": "Stakeholders", "isCorrect": true, "feedback": "Correto! Stakeholders são todas as partes interessadas na organização."},
+          {"text": "Consumidores", "isCorrect": false, "feedback": "Incorreto. Consumidores são um tipo importante de stakeholder, mas o termo abrangente é outro."}
+        ]
+      },
+      {
+        "enunciated": "Qual das seguintes opções NÃO é considerada uma das 'Cinco Forças' de Porter que moldam a competição na indústria?",
+        "options": [
+          {"text": "Ameaça de novos entrantes", "isCorrect": false, "feedback": "Incorreto. Esta é uma das cinco forças."},
+          {"text": "Poder de barganha dos fornecedores", "isCorrect": false, "feedback": "Incorreto. Esta é uma das cinco forças."},
+          {"text": "Rivalidade entre concorrentes existentes", "isCorrect": false, "feedback": "Incorreto. Esta é uma das cinco forças."},
+          {"text": "Inovação tecnológica disruptiva", "isCorrect": true, "feedback": "Correto! Embora a tecnologia influencie, a 'inovação tecnológica' em si não é uma das cinco forças nomeadas por Porter (as outras são Poder de Barganha dos Clientes e Ameaça de Produtos Substitutos)."}
+        ]
+      },
+      {
+        "enunciated": "Uma estratégia competitiva genérica de Porter que busca oferecer produtos ou serviços únicos, valorizados pelos clientes e pelos quais eles estão dispostos a pagar um preço premium, é a:",
+        "options": [
+          {"text": "Liderança em Custo", "isCorrect": false, "feedback": "Incorreto. Liderança em custo busca o menor custo de produção e operação."},
+          {"text": "Diferenciação", "isCorrect": true, "feedback": "Correto! Diferenciação foca em tornar o produto/serviço único e desejável."},
+          {"text": "Enfoque (Foco)", "isCorrect": false, "feedback": "Incorreto. Enfoque (ou nicho) concentra-se em um segmento específico do mercado, podendo usar custo ou diferenciação dentro dele."},
+          {"text": "Diversificação", "isCorrect": false, "feedback": "Incorreto. Diversificação é uma estratégia de crescimento, entrando em novos mercados ou produtos."}
+        ]
+      },
+      {
+        "enunciated": "A responsabilidade social empresarial (RSE) refere-se ao compromisso da organização com:",
+        "options": [
+          {"text": "Apenas a maximização do lucro para os acionistas.", "isCorrect": false, "feedback": "Incorreto. Esta é uma visão mais antiga e restrita da função da empresa."},
+          {"text": "O cumprimento estrito das leis e regulamentações.", "isCorrect": false, "feedback": "Incorreto. A RSE geralmente vai além das obrigações legais."},
+          {"text": "O bem-estar da sociedade e a sustentabilidade, além dos interesses econômicos.", "isCorrect": true, "feedback": "Correto! RSE envolve considerar os impactos sociais e ambientais das ações da empresa."},
+          {"text": "A filantropia e doações para caridade.", "isCorrect": false, "feedback": "Incorreto. Filantropia pode ser parte da RSE, mas RSE é um conceito mais amplo e integrado à estratégia."}
+        ]
+      },
+      {
+        "enunciated": "O processo de atrair candidatos qualificados para as vagas existentes em uma organização é chamado de:",
+        "options": [
+          {"text": "Seleção", "isCorrect": false, "feedback": "Incorreto. Seleção é o processo de escolher entre os candidatos recrutados."},
+          {"text": "Recrutamento", "isCorrect": true, "feedback": "Correto! Recrutamento visa criar um conjunto de candidatos para uma vaga."},
+          {"text": "Treinamento", "isCorrect": false, "feedback": "Incorreto. Treinamento desenvolve habilidades dos funcionários atuais."},
+          {"text": "Avaliação de Desempenho", "isCorrect": false, "feedback": "Incorreto. Avaliação mede o desempenho do funcionário no cargo."}
+        ]
+      },
+      {
+        "enunciated": "Qual ferramenta de gestão da qualidade busca a melhoria contínua dos processos?",
+        "options": [
+          {"text": "Benchmarking", "isCorrect": false, "feedback": "Incorreto. Benchmarking compara práticas com as dos melhores do mercado."},
+          {"text": "PDCA (Plan-Do-Check-Act)", "isCorrect": true, "feedback": "Correto! O ciclo PDCA é a base da melhoria contínua de processos."},
+          {"text": "Análise SWOT", "isCorrect": false, "feedback": "Incorreto. SWOT é para análise estratégica."},
+          {"text": "Estrutura Matricial", "isCorrect": false, "feedback": "Incorreto. Estrutura matricial é um tipo de desenho organizacional."}
+        ]
+      },
+      {
+        "enunciated": "O nível hierárquico responsável por supervisionar diretamente os trabalhadores da linha de frente e coordenar as tarefas diárias é o:",
+        "options": [
+          {"text": "Nível Estratégico (Alta Administração)", "isCorrect": false, "feedback": "Incorreto. O nível estratégico define a direção geral da empresa."},
+          {"text": "Nível Tático (Gerência Média)", "isCorrect": false, "feedback": "Incorreto. O nível tático traduz as estratégias em planos departamentais."},
+          {"text": "Nível Operacional (Supervisão)", "isCorrect": true, "feedback": "Correto! O nível operacional lida com a execução cotidiana das tarefas."},
+          {"text": "Nível de Staff (Assessoria)", "isCorrect": false, "feedback": "Incorreto. Staff oferece suporte e consultoria, sem autoridade de linha direta."}
+        ]
+      },
+      {
+        "enunciated": "O que significa a sigla 'CEO' em uma estrutura organizacional?",
+        "options": [
+          {"text": "Chief Efficiency Officer", "isCorrect": false, "feedback": "Incorreto."},
+          {"text": "Chief Executive Officer", "isCorrect": true, "feedback": "Correto! É o principal executivo da empresa, o Diretor-Presidente ou Diretor Executivo."},
+          {"text": "Chief Employee Organizer", "isCorrect": false, "feedback": "Incorreto."},
+          {"text": "Chief External Operations", "isCorrect": false, "feedback": "Incorreto."}
+        ]
+      },
+      {
+        "enunciated": "Qual o principal foco da Administração por Objetivos (APO), popularizada por Peter Drucker?",
+        "options": [
+          {"text": "Controle rígido dos processos e tarefas.", "isCorrect": false, "feedback": "Incorreto. O foco não é o controle do processo em si."},
+          {"text": "Definição participativa de objetivos e avaliação baseada em resultados.", "isCorrect": true, "feedback": "Correto! A APO enfatiza o acordo sobre metas claras e a avaliação do seu alcance."},
+          {"text": "Hierarquia formal e comunicação descendente.", "isCorrect": false, "feedback": "Incorreto. A APO geralmente promove mais participação e comunicação."},
+          {"text": "Satisfação e bem-estar dos funcionários acima de tudo.", "isCorrect": false, "feedback": "Incorreto. Embora possa contribuir, o foco principal da APO são os resultados e objetivos."}
+        ]
+      },
+      {
+        "enunciated": "A capacidade de entender e motivar outras pessoas, tanto individualmente quanto em grupos, é uma habilidade gerencial classificada como:",
+        "options": [
+          {"text": "Habilidade Técnica", "isCorrect": false, "feedback": "Incorreto. Habilidade técnica refere-se ao conhecimento específico da área."},
+          {"text": "Habilidade Conceitual", "isCorrect": false, "feedback": "Incorreto. Habilidade conceitual é a capacidade de ver a organização como um todo."},
+          {"text": "Habilidade Humana (Interpessoal)", "isCorrect": true, "feedback": "Correto! Habilidade humana envolve lidar com pessoas."},
+          {"text": "Habilidade de Decisão", "isCorrect": false, "feedback": "Incorreto. Habilidade de decisão é a capacidade de escolher cursos de ação."}
+        ]
+      },
+      {
+        "enunciated": "Qual habilidade gerencial é mais importante para os gerentes de alto nível (nível estratégico)?",
+        "options": [
+          {"text": "Habilidade Técnica", "isCorrect": false, "feedback": "Incorreto. Habilidades técnicas são mais cruciais nos níveis operacionais."},
+          {"text": "Habilidade Humana", "isCorrect": false, "feedback": "Incorreto. Habilidades humanas são importantes em todos os níveis, mas não a *mais* distintiva do topo."},
+          {"text": "Habilidade Conceitual", "isCorrect": true, "feedback": "Correto! A capacidade de pensar estrategicamente e ver o 'quadro geral' é crucial no topo."},
+          {"text": "Habilidade Operacional", "isCorrect": false, "feedback": "Incorreto. Habilidade operacional está ligada à execução de tarefas."}
+        ]
+      },
+      {
+        "enunciated": "O processo de monitorar as atividades para garantir que elas estejam sendo realizadas conforme o planejado e corrigir desvios significativos é a função de:",
+        "options": [
+          {"text": "Planejamento", "isCorrect": false, "feedback": "Incorreto. Planejamento define o curso."},
+          {"text": "Organização", "isCorrect": false, "feedback": "Incorreto. Organização estrutura os recursos."},
+          {"text": "Direção", "isCorrect": false, "feedback": "Incorreto. Direção guia as pessoas."},
+          {"text": "Controle", "isCorrect": true, "feedback": "Correto! Controle verifica se o planejado está sendo alcançado."}
+        ]
+      },
+      {
+        "enunciated": "Um organograma representa visualmente:",
+        "options": [
+          {"text": "O fluxo de processos da empresa.", "isCorrect": false, "feedback": "Incorreto. Fluxogramas representam processos."},
+          {"text": "A estrutura formal da organização, mostrando cargos e relações de subordinação.", "isCorrect": true, "feedback": "Correto! O organograma é um mapa da hierarquia e dos departamentos."},
+          {"text": "A rede de comunicação informal.", "isCorrect": false, "feedback": "Incorreto. A rede informal não costuma ser representada em organogramas."},
+          {"text": "Os objetivos e metas estratégicas.", "isCorrect": false, "feedback": "Incorreto. Objetivos são definidos no planejamento, não visualizados no organograma."}
+        ]
+      },
+      {
+        "enunciated": "O 'Princípio da Unidade de Comando', defendido por Fayol, afirma que:",
+        "options": [
+          {"text": "Toda a organização deve ter um único objetivo principal.", "isCorrect": false, "feedback": "Incorreto. Isso se relaciona mais à unidade de direção."},
+          {"text": "Cada subordinado deve receber ordens de apenas um superior.", "isCorrect": true, "feedback": "Correto! Isso evita conflitos de autoridade e confusão."},
+          {"text": "Deve haver apenas um CEO na empresa.", "isCorrect": false, "feedback": "Incorreto. Embora comum, o princípio foca na relação superior-subordinado imediato."},
+          {"text": "As decisões devem ser centralizadas em um único ponto.", "isCorrect": false, "feedback": "Incorreto. Isso se refere à centralização/descentralização, não à unidade de comando."}
+        ]
+      },
+      {
+        "enunciated": "Qual abordagem de gestão enfatiza a satisfação do cliente, o envolvimento dos funcionários e a melhoria contínua como chave para a competitividade?",
+        "options": [
+          {"text": "Reengenharia de Processos", "isCorrect": false, "feedback": "Incorreto. Reengenharia foca em redesenhos radicais de processos."},
+          {"text": "Gestão da Qualidade Total (TQM)", "isCorrect": true, "feedback": "Correto! TQM (Total Quality Management) abrange esses princípios em toda a organização."},
+          {"text": "Administração Científica", "isCorrect": false, "feedback": "Incorreto. Adm. Científica foca na eficiência da tarefa."},
+          {"text": "Teoria da Contingência", "isCorrect": false, "feedback": "Incorreto. Teoria da Contingência foca na adaptação da estrutura à situação."}
+        ]
+      },
+      {
+        "enunciated": "A comunicação que flui dos níveis hierárquicos mais altos para os mais baixos é chamada de:",
+        "options": [
+          {"text": "Comunicação Ascendente", "isCorrect": false, "feedback": "Incorreto. Ascendente é de baixo para cima (subordinado para chefe)."},
+          {"text": "Comunicação Descendente", "isCorrect": true, "feedback": "Correto! É a comunicação que vem da diretoria/gerência para os funcionários."},
+          {"text": "Comunicação Lateral (Horizontal)", "isCorrect": false, "feedback": "Incorreto. Lateral ocorre entre pessoas do mesmo nível hierárquico."},
+          {"text": "Comunicação Diagonal", "isCorrect": false, "feedback": "Incorreto. Diagonal cruza níveis e departamentos diferentes."}
+        ]
+      },
+      {
+        "enunciated": "O que é 'Benchmarking' no contexto administrativo?",
+        "options": [
+          {"text": "Definir metas internas de desempenho.", "isCorrect": false, "feedback": "Incorreto. Isso faz parte do controle, mas não define benchmarking."},
+          {"text": "Avaliar o desempenho financeiro da empresa.", "isCorrect": false, "feedback": "Incorreto. Benchmarking não se limita ao financeiro."},
+          {"text": "Comparar processos e práticas da empresa com os líderes de mercado ou setor.", "isCorrect": true, "feedback": "Correto! Benchmarking busca aprender com os melhores para melhorar internamente."},
+          {"text": "Implementar um sistema de controle de qualidade.", "isCorrect": false, "feedback": "Incorreto. Benchmarking pode *informar* a melhoria da qualidade, mas não é o sistema em si."}
+        ]
+      },
+      {
+        "enunciated": "A departamentalização que agrupa atividades com base nos produtos ou serviços oferecidos pela empresa é a:",
+        "options": [
+          {"text": "Departamentalização Funcional", "isCorrect": false, "feedback": "Incorreto. Funcional agrupa por especialidade (Marketing, Finanças)."},
+          {"text": "Departamentalização Geográfica", "isCorrect": false, "feedback": "Incorreto. Geográfica agrupa por região ou território."},
+          {"text": "Departamentalização por Produto/Serviço", "isCorrect": true, "feedback": "Correto! Cada divisão é responsável por um produto ou linha de produtos."},
+          {"text": "Departamentalização por Cliente", "isCorrect": false, "feedback": "Incorreto. Por cliente agrupa atividades focadas em tipos específicos de clientes."}
+        ]
+      },
+      {
+        "enunciated": "O conceito de ' empowerment' nas organizações refere-se a:",
+        "options": [
+          {"text": "Aumentar o salário dos funcionários.", "isCorrect": false, "feedback": "Incorreto. Empowerment não é diretamente sobre salário."},
+          {"text": "Dar mais poder, autonomia e responsabilidade aos funcionários na tomada de decisões.", "isCorrect": true, "feedback": "Correto! Empowerment visa descentralizar o poder e engajar os funcionários."},
+          {"text": "Implementar tecnologia para automatizar tarefas.", "isCorrect": false, "feedback": "Incorreto. Automação pode mudar o trabalho, mas não é empowerment."},
+          {"text": "Contratar mais gerentes para supervisionar as equipes.", "isCorrect": false, "feedback": "Incorreto. Empowerment geralmente busca reduzir a necessidade de supervisão direta."}
+        ]
+      },
+      {
+        "enunciated": "Qual o principal objetivo da função de 'Organização' no processo administrativo?",
+        "options": [
+          {"text": "Definir a missão e a visão da empresa.", "isCorrect": false, "feedback": "Incorreto. Isso pertence ao Planejamento."},
+          {"text": "Motivar os funcionários a alcançar metas.", "isCorrect": false, "feedback": "Incorreto. Isso pertence à Direção."},
+          {"text": "Estruturar e alocar os recursos (humanos, materiais, financeiros) para realizar os planos.", "isCorrect": true, "feedback": "Correto! Organizar é criar a estrutura necessária para a ação."},
+          {"text": "Monitorar o desempenho e fazer correções.", "isCorrect": false, "feedback": "Incorreto. Isso pertence ao Controle."}
+        ]
+      },
+      {
+        "enunciated": "A ética empresarial preocupa-se principalmente com:",
+        "options": [
+          {"text": "A maximização da eficiência a qualquer custo.", "isCorrect": false, "feedback": "Incorreto. A ética pode impor limites à busca da eficiência."},
+          {"text": "Os padrões morais e princípios que guiam o comportamento e as decisões nos negócios.", "isCorrect": true, "feedback": "Correto! Ética envolve distinguir o certo do errado no contexto empresarial."},
+          {"text": "As leis trabalhistas e ambientais.", "isCorrect": false, "feedback": "Incorreto. O cumprimento da lei é o mínimo; a ética pode exigir mais."},
+          {"text": "A imagem pública e a reputação da empresa.", "isCorrect": false, "feedback": "Incorreto. A reputação pode ser uma consequência do comportamento ético, mas não é o foco principal da ética em si."}
+        ]
+      },
+      {
+        "enunciated": "O que caracteriza uma 'Organização que Aprende' (Learning Organization)?",
+        "options": [
+          {"text": "Possui muitos programas de treinamento formal.", "isCorrect": false, "feedback": "Incorreto. Treinamento formal é apenas uma parte; o conceito é mais amplo."},
+          {"text": "É altamente burocrática e segue regras rígidas.", "isCorrect": false, "feedback": "Incorreto. Organizações que aprendem tendem a ser mais flexíveis e adaptáveis."},
+          {"text": "Tem a capacidade de adquirir, compartilhar e utilizar conhecimento para se adaptar e inovar continuamente.", "isCorrect": true, "feedback": "Correto! O foco está na aprendizagem contínua e na adaptação."},
+          {"text": "Foca exclusivamente em cortar custos para aumentar a eficiência.", "isCorrect": false, "feedback": "Incorreto. O foco principal é a adaptação e a inovação através do conhecimento."}
+        ]
+      },
+      {
+        "enunciated": "A globalização impacta a administração principalmente ao:",
+        "options": [
+          {"text": "Simplificar o ambiente de negócios, reduzindo a concorrência.", "isCorrect": false, "feedback": "Incorreto. A globalização geralmente aumenta a complexidade e a concorrência."},
+          {"text": "Aumentar a complexidade, exigindo lidar com diferentes culturas, mercados e regulamentações.", "isCorrect": true, "feedback": "Correto! A administração em um contexto global enfrenta desafios adicionais."},
+          {"text": "Tornar a função de controle desnecessária.", "isCorrect": false, "feedback": "Incorreto. O controle torna-se ainda mais complexo e necessário."},
+          {"text": "Reduzir a importância do planejamento estratégico.", "isCorrect": false, "feedback": "Incorreto. O planejamento estratégico torna-se mais crucial para navegar no ambiente global."}
+        ]
+      },
+      {
+        "enunciated": "O processo de identificar oportunidades, desenvolver e lançar um novo negócio é conhecido como:",
+        "options": [
+          {"text": "Administração de Operações", "isCorrect": false, "feedback": "Incorreto. Adm. de Operações foca na gestão dos processos produtivos existentes."},
+          {"text": "Gestão de Projetos", "isCorrect": false, "feedback": "Incorreto. Gestão de Projetos aplica-se a empreendimentos temporários com objetivos definidos."},
+          {"text": "Empreendedorismo", "isCorrect": true, "feedback": "Correto! Empreendedorismo envolve a criação de novos negócios e a inovação."},
+          {"text": "Marketing Estratégico", "isCorrect": false, "feedback": "Incorreto. Marketing Estratégico define como competir no mercado, mas não é o processo de criação do negócio em si."}
+        ]
+      },
+      {
+        "enunciated": "Qual tipo de controle ocorre *antes* da atividade de trabalho ser realizada, focando na prevenção de problemas?",
+        "options": [
+          {"text": "Controle Concomitante (Durante)", "isCorrect": false, "feedback": "Incorreto. Controle concomitante ocorre durante a execução da atividade."},
+          {"text": "Controle por Feedback (Posterior)", "isCorrect": false, "feedback": "Incorreto. Controle por feedback ocorre após a atividade, analisando os resultados."},
+          {"text": "Controle Preliminar (Preventivo ou Antecipado)", "isCorrect": true, "feedback": "Correto! O controle preliminar foca nos inputs (recursos, regras) para evitar problemas futuros."},
+          {"text": "Controle Estratégico", "isCorrect": false, "feedback": "Incorreto. Controle estratégico monitora o alinhamento com os objetivos de longo prazo."}
+        ]
+      },
+      {
+        "enunciated": "A 'Amplitude de Controle' (ou Amplitude Administrativa) refere-se:",
+        "options": [
+          {"text": "Ao poder total que um gerente possui sobre a organização.", "isCorrect": false, "feedback": "Incorreto. Isso se relaciona mais com o nível hierárquico e a autoridade."},
+          {"text": "Ao número de subordinados que um gerente pode supervisionar de forma eficaz.", "isCorrect": true, "feedback": "Correto! Uma amplitude maior significa mais subordinados por gerente."},
+          {"text": "À variedade de tarefas que um funcionário realiza.", "isCorrect": false, "feedback": "Incorreto. Isso se relaciona à especialização do trabalho."},
+          {"text": "Ao alcance geográfico das operações da empresa.", "isCorrect": false, "feedback": "Incorreto. Isso se refere à escala ou escopo geográfico."}
+        ]
+      },
+      {
+        "enunciated": "O processo de converter mensagens em símbolos (verbais ou não verbais) para envio é chamado de:",
+        "options": [
+          {"text": "Decodificação", "isCorrect": false, "feedback": "Incorreto. Decodificação é a interpretação da mensagem pelo receptor."},
+          {"text": "Codificação", "isCorrect": true, "feedback": "Correto! O emissor codifica a mensagem antes de enviá-la."},
+          {"text": "Feedback", "isCorrect": false, "feedback": "Incorreto. Feedback é a resposta do receptor ao emissor."},
+          {"text": "Canal", "isCorrect": false, "feedback": "Incorreto. Canal é o meio pelo qual a mensagem é transmitida."}
+        ]
+      },
+      {
+        "enunciated": "Qual o principal legado da Escola das Relações Humanas para a administração?",
+        "options": [
+          {"text": "A ênfase na eficiência máxima através da padronização.", "isCorrect": false, "feedback": "Incorreto. Esse foi o legado da Administração Científica."},
+          {"text": "A criação de estruturas organizacionais rígidas e formais.", "isCorrect": false, "feedback": "Incorreto. Esse foi o foco da Teoria Clássica e da Burocracia."},
+          {"text": "O reconhecimento da importância dos fatores sociais, psicológicos e da dinâmica de grupo no trabalho.", "isCorrect": true, "feedback": "Correto! Mudou o foco do 'homem econômico' para o 'homem social'."},
+          {"text": "A visão da organização como um sistema aberto em interação com o ambiente.", "isCorrect": false, "feedback": "Incorreto. Esse foi o legado da Teoria de Sistemas."}
+        ]
+      }
+    ]
+  }
+}

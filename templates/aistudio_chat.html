@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gemini Chat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="../assets/css/aistudio.css">
+</head>
+<body>
+<header>
+  <button class="btn-back" onclick="history.back()">⬅ Voltar</button>
+  <button class="btn-theme" onclick="toggleTheme()">🎨 Tema</button>
+</header>
+<div class="container">
+  <div class="chat-box">
+    <h1>🧠 Gemini Chat</h1>
+
+    <div class="input-field">
+      <label for="api_key">🔑 Chave da API:</label>
+      <input type="text" id="api_key" placeholder="Insira sua chave de API">
+    </div>
+
+    <div class="input-field">
+      <label for="prompt">💬 Prompt:</label>
+      <textarea id="prompt" rows="5" placeholder="Escreva um poema sobre o mar..."></textarea>
+    </div>
+
+    <button class="send-btn" onclick="enviarPrompt()">🚀 Enviar</button>
+
+    <div id="loading" style="display:none;">⏳ Carregando...</div>
+    <div id="message"></div>
+    <div id="error-message" style="color: red;"></div>
+  </div>
+</div>
+
+<footer>
+  Desenvolvido por Cleiton Leonel Creton
+</footer>
+<script src="../assets/js/aistudio.js"></script>
+</body>
+</html>

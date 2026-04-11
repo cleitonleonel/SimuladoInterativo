@@ -1,0 +1,196 @@
+:root {
+    /* Colors - High Definition Palette */
+    --primary: #6366f1;
+    --primary-hover: #4f46e5;
+    --secondary: #0ea5e9;
+    --accent: #f43f5e;
+    
+    /* Semantic Colors */
+    --success: #10b981;
+    --error: #f43f5e;
+    --warning: #f59e0b;
+    --info: #3b82f6;
+
+    /* Light Mode - Enhanced Contrast */
+    --bg-main: #fcfdfe;
+    --bg-card: rgba(255, 255, 255, 0.85);
+    --text-main: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --border: #e2e8f0;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.4);
+    --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 10px -2px rgba(0, 0, 0, 0.03);
+
+    /* Dark Mode - Professional Slate */
+    --dark-bg-main: #020617;
+    --dark-bg-card: #0f172a;
+    --dark-text-main: #f8fafc; /* Pure white/slate */
+    --dark-text-secondary: #cbd5e1; /* Lightened from #94a3b8 */
+    --dark-text-muted: #64748b;
+    --dark-border: #1e293b;
+    --dark-glass-bg: rgba(15, 23, 42, 0.85);
+    --dark-glass-border: rgba(255, 255, 255, 0.1);
+    --dark-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+
+    /* Transitions */
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--text-main);
+    background-color: var(--bg-main);
+    min-height: 100vh;
+    line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
+}
+
+body.dark-mode {
+    background-color: var(--dark-bg-main);
+    color: var(--dark-text-main);
+}
+
+/* Glassmorphism System */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow);
+}
+
+.dark-mode .glass {
+    background: var(--dark-glass-bg);
+    border: 1px solid var(--dark-glass-border);
+    box-shadow: var(--dark-shadow);
+}
+
+/* Global Typography */
+h1, h2, h3, h4 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--text-main);
+}
+
+.dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4 {
+    color: var(--dark-text-main);
+}
+
+/* Shared Header Pattern */
+.global-header {
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+}
+
+.dark-mode .global-header {
+    background: var(--dark-glass-bg);
+    border-color: var(--dark-border);
+}
+
+.brand-name {
+    color: var(--text-main);
+    transition: color 0.3s ease;
+}
+
+.dark-mode .brand-name {
+    color: var(--dark-text-main);
+}
+
+.nav-logo {
+    border-radius: 50%;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.dark-mode .nav-logo {
+    filter: brightness(0.9) contrast(1.1);
+}
+
+/* New Utilities */
+.top-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    z-index: 2000;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.floating-badge {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 99px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+/* Buttons Base */
+.btn-premium {
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-main);
+}
+
+.dark-mode .btn-premium {
+    border-color: var(--dark-border);
+    color: var(--dark-text-main) !important;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
