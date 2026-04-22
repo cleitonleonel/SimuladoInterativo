@@ -139,47 +139,54 @@ Você pode criar seus próprios conjuntos de questões para os simulados. A estr
       - `text`: O texto da opção (pode conter HTML).
       - `isCorrect`: Define se a alternativa é correta (`true` ou `false`).
       - `feedback`: Mensagem exibida ao selecionar a opção.
-      - `isHTML` (opcional): Se `false`, o texto será tratado como texto puro. O padrão é `true`.
 
 ---
 
-## 🔤 Sobre o campo `isHTML`
+## 🔤 Formatação Automática
 
-Por padrão, o conteúdo da opção (`text`) será **renderizado como HTML**.
+O sistema agora processa automaticamente os campos `enunciated` e `text` das opções, detectando o conteúdo ideal:
 
-Se a resposta tiver tags (<>) o texto não é exibido corretamente.
+- **Imagens**: Converte automaticamente as tags proprietárias (`<grupoalayout>`) em imagens padrão.
+- **Blocos de Código**: Identifica linguagens de programação e aplica realce visual, indentação e fundo escuro.
+- **Anexos**: Transforma links de arquivos (`<grupoaattachment>`) em botões de download modernos.
+- **Limpeza de HTML**: Remove tags de envelope (`<html>`, `<body>`) que podem vir de sistemas legados.
+
+Você não precisa mais usar flags como `isHTML`; o simulado decide a melhor forma de exibir o conteúdo.
 ![without_flag.png](assets/img/without_flag.png)
 
-Caso a opção contenha **texto que se pareça com tags HTML, mas não deve ser interpretado como tal**, defina `"isHTML": false`.
+![without_flag.png](assets/img/without_flag.png)
 
-![with_flag.png](assets/img/with_flag.png)
+### Exemplos de Opções
 
-### Exemplos com `isHTML: false` (texto puro)
+O sistema lida com diferentes tipos de conteúdo automaticamente:
 
+#### Texto com Formatação HTML
 ```json
 {
-  "text": "<class 'int'>",
+  "text": "O comando <b>print()</b> é usado para exibir mensagens.",
   "isCorrect": true,
-  "feedback": "Correto! O número 42 é um inteiro (int).",
-  "isHTML": false
+  "feedback": "Correto! Tags HTML como <b>, <i>, <sup> são suportadas."
 }
 ```
 
-### Exemplos com HTML (padrão)
-
+#### Texto que se parece com Tags (Automático)
+Textos como classes Python ou tipos genéricos são detectados e exibidos corretamente sem precisar de flags:
 ```json
 {
-  "text": "<b>print()</b>",
+  "text": "A saída será <class 'int'>",
   "isCorrect": true,
-  "feedback": "Correto! O uso de <b>print()</b> exibe valores na tela."
+  "feedback": "O sistema faz o escape automático de símbolos < e > quando não são tags reais."
 }
 ```
 
+#### Fórmulas Matemáticas Simples
 ```json
 {
-  "text": "2<sup>3</sup>",
+  "text": "O resultado é 2<sup>10</sup>",
   "isCorrect": true,
-  "feedback": "Correto! Isso representa 2 elevado à 3ª potência."
+  "feedback": "Resulta em 1024."
+}
+```
 }
 ```
 

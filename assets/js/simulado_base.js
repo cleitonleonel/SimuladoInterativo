@@ -19,6 +19,7 @@ let questaoAtual = 0;
 let acertos = 0;
 let tempoRestante = 60 * 60;
 let intervalo;
+let startTime;
 
 function shuffle_secure(n) {
 	const arr = Array.from({length: n}, (_, i) => i);
@@ -32,6 +33,7 @@ function shuffle_secure(n) {
 function iniciarSimuladoReal() {
 	acertos = 0;
 	questaoAtual = 0;
+	startTime = Date.now();
     const uploadArea = document.getElementById("uploadArea");
     if (uploadArea) uploadArea.style.display = "none";
 	iniciarCronometro();
@@ -142,7 +144,7 @@ function renderizarQuestaoReal() {
 	q.options.forEach(op => {
 		const btn = document.createElement("button");
 		btn.className = "opcao";
-		renderConteudoComFlag(btn, op.text, op.isHTML);
+		renderConteudoComFlag(btn, op.text);
 		btn.onclick = () => {
 			const correta = q.options.find(o => o.isCorrect);
 			const feedback = document.createElement("div");
@@ -156,7 +158,7 @@ function renderizarQuestaoReal() {
 				acertos++;
                 if (dots[questaoAtual]) dots[questaoAtual].classList.add("correct");
 			} else {
-				feedback.innerHTML = "❌ Incorreto. A correta era: " + correta.text;
+				feedback.innerHTML = "❌ Incorreto. A correta era: <br>" + formatarTexto(correta.text);
 				feedback.className = "incorreta feedback";
 				audioErro.play();
                 if (dots[questaoAtual]) dots[questaoAtual].classList.add("wrong");
@@ -223,7 +225,7 @@ function renderizarQuestao() {
 	q.options.forEach((opcao) => {
 		const btn = document.createElement("button");
 		btn.className = "opcao";
-		renderConteudoComFlag(btn, opcao.text, opcao.isHTML);
+		renderConteudoComFlag(btn, opcao.text);
 		btn.onclick = () => {
 			const tempo = ((Date.now() - inicio) / 1000).toFixed(2);
 			tempos.push(tempo);
@@ -244,7 +246,7 @@ function renderizarQuestao() {
 				const corretaDiv = document.createElement("div");
 				corretaDiv.className = "correta feedback";
 				corretaDiv.style.marginTop = "10px";
-				corretaDiv.innerHTML = `✔️ Resposta correta: <br><strong>${correta.text}</strong>`;
+				corretaDiv.innerHTML = `✔️ Resposta correta: <br><strong>${formatarTexto(correta.text)}</strong>`;
 				audioErro.play();
 				qDiv.appendChild(corretaDiv);
 			}
@@ -507,13 +509,7 @@ function compartilharWhatsApp() {
 	window.open(url, '_blank');
 }
 
-function renderConteudoSeguro(destino, texto) {
-  const el = document.createElement("div");
-  el.innerHTML = texto;
-
-  const contemTagsHTML = el.innerHTML !== el.textContent;
-  destino.innerHTML = contemTagsHTML ? texto : escapeHTML(texto);
-}
+// --- Funções de Utilitários ---
 
 function escapeHTML(str) {
   const div = document.createElement("div");
@@ -625,19 +621,70 @@ function indentarCodigo(linhas, linguagem) {
 }
 
 function formatarTexto(texto) {
-  const linhas = texto.split('\n');
+  if (!texto) return "";
+
+  let processado = texto;
+
+  // 1. Tenta extrair apenas o conteúdo útil se houver uma estrutura de documento
+  // Procura por <div class="question">, <div class="question-option"> ou pelo conteúdo dentro de <body>
+  const extracao = processado.match(/<div[^>]+class=["']question(?:-option)?["'][^>]*>([\s\S]*)<\/div>/i) || 
+                   processado.match(/<body[^>]*>([\s\S]*)<\/body>/i);
+  
+  if (extracao) {
+    processado = extracao[1];
+  }
+
+  // 1. Converte tags de imagens externas para imagens padrão
+  processado = processado.replace(/<grupoalayout\s+[^>]*banner="([^"]*)"[^>]*>[\s\S]*?<\/grupoalayout>/gi, (match, url) => {
+    return `<img src="${url}" class="enunciado-img" style="max-width: 100%; display: block; margin: 1.5rem auto; border-radius: 12px; box-shadow: var(--shadow);">`;
+  });
+
+  // 2. Converte tags de anexos externas para botões de download
+  processado = processado.replace(/<grupoaattachment\s+[^>]*file="([^"]*)"[^>]*title="([^"]*)"[^>]*buttoncolor="([^"]*)"[^>]*buttontextcolor="([^"]*)"[^>]*>[\s\S]*?<\/grupoaattachment>/gi, (match, url, titulo, corBg, corTxt) => {
+    return `<a href="${url}" target="_blank" class="btn-anexo" style="background: ${corBg}; color: ${corTxt};">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+      <span>${titulo}</span>
+    </a>`;
+  });
+
+  // 3. Normaliza quebras de linha em HTML para o processador, evitando duplicidade
+  if (processado.includes('<p') || processado.includes('<div')) {
+    processado = processado.replace(/<(p|div|br)[^>]*>/gi, '\n$&');
+  }
+
+  // 4. Limpeza final de tags residuais de envelope
+  processado = processado.replace(/<\/?(html|head|body|meta|link)[^>]*>/gi, '');
+
+  const linhas = processado.split('\n');
   const resultado = [];
   let emBlocoFence = false;
   let linguagemFence = null;
   let emBlocoHeuristico = false;
   let blocoAtual = [];
 
-  const CODIGO_REGEX = /^(public|private|protected|class|interface|enum|abstract|void|int|double|float|long|boolean|char|byte|short|String|return|import|package|if\s*[\({]|else[\s{]|for\s*\(|while\s*\(|do\s*[{(]|try\s*\{|catch\s*\(|finally|new\s+\w|static|final|this\.|super\.|self\.|def\s+\w|elif\s|pass\b|\/\/|\/\*|\*|\}|@\w)/;
+  const CODIGO_REGEX = /^(public|private|protected|class|interface|enum|abstract|void|int|double|float|long|boolean|char|byte|short|String|return|import|from|package|if\b|else\b|for\b|while\b|do\b|try\b|catch\b|except\b|finally\b|new\s+\w|static|final|this\.|super\.|self\.|def\b|elif\b|pass\b|print\b|yield\b|assert\b|with\b|raise\b|lambda\b|\/\/|\/\*|\*|\}|@\w)/;
 
   const pareceCodigoLinha = (linha) => {
-    const l = linha.trim();
-    if (!l) return emBlocoHeuristico;
-    return CODIGO_REGEX.test(l) || /[{};]$/.test(l);
+    // Limpa apenas tags HTML REAIS (começam com letra ou / seguidas de caracteres de palavra), preservando < b ou x < y
+    const textoPuro = linha.replace(/<\/?\w+\b[^>]*>/g, '').trim();
+    if (!textoPuro) return emBlocoHeuristico;
+
+    const temKeyword = CODIGO_REGEX.test(textoPuro);
+    // Ignora ponto e vírgula se ele fizer parte de uma entidade HTML ou se vier após um parêntese (comum em frases)
+    const temEstruturaForte = /[{;]$/.test(textoPuro) && !/&[a-zA-Z0-9#]+;$/.test(textoPuro) && !/\);$/.test(textoPuro);
+    const temEstruturaFraca = /[():[\]]$/.test(textoPuro); 
+    const temOperador = /[=+\-*\/<>!|&]/.test(textoPuro);
+    const estaIndented = /^(\s{2,}|\t)/.test(linha.replace(/<[^>]*>/g, ''));
+    // Detecta atribuição simples (ex: x = 10 ou lista = [])
+    const temAtribuicao = /^[a-zA-Z_]\w*\s*=[^=]/.test(textoPuro);
+
+    // Para COMEÇAR um bloco, precisa de keyword, sinal forte ou atribuição
+    if (!emBlocoHeuristico) {
+      return temKeyword || temEstruturaForte || temAtribuicao;
+    }
+
+    // Uma vez dentro do bloco, aceitamos sinais fracos, operadores, indentação ou atribuição
+    return temKeyword || temEstruturaForte || temEstruturaFraca || temOperador || estaIndented || temAtribuicao;
   };
 
   const emitirBloco = (linguagem) => {
@@ -681,10 +728,18 @@ function formatarTexto(texto) {
         emBlocoHeuristico = true;
         blocoAtual = [];
       }
-      blocoAtual.push(linha);
+      // Ao guardar no bloco, limpamos apenas as tags reais para manter a integridade do código
+      blocoAtual.push(linha.replace(/<\/?\w+\b[^>]*>/g, ''));
     } else {
       if (emBlocoHeuristico) emitirBloco(null);
-      if (trimmed) resultado.push(escapeHTML(linha));
+      // Lista de tags HTML seguras. Usamos \b para evitar que < b seja confundido com <b>
+      const TAGS_SEGURAS = /<\/?(b|i|u|strong|em|sup|sub|br|p|div|span|img|a|pre|code|h[1-6]|ul|ol|li|blockquote|table|tr|td|th|thead|tbody|tfoot)\b[^>]*>/i;
+      
+      const tDiv = document.createElement("div");
+      tDiv.innerHTML = linha;
+      // Consideramos HTML apenas se houver tags seguras OU entidades HTML
+      const temHTML = TAGS_SEGURAS.test(linha) || /&[a-zA-Z0-9#]+;/.test(linha);
+      resultado.push(temHTML ? linha : escapeHTML(linha));
     }
   }
 
@@ -692,15 +747,20 @@ function formatarTexto(texto) {
   if (emBlocoFence && blocoAtual.length > 0) emitirBloco(linguagemFence);
   else if (emBlocoHeuristico && blocoAtual.length > 0) emitirBloco(null);
 
-  return resultado.join('<br>');
+  // Une as linhas de forma inteligente: evita <br> antes de tags de bloco
+  return resultado.reduce((acc, linha, i) => {
+    const limpa = linha.trim();
+    if (!limpa) return acc;
+    
+    if (i === 0) return limpa;
+    
+    // Se a linha começa com uma tag de bloco ou de formatação, não precisa de <br>
+    const isSpecialTag = /^<(p|div|br|img|a|pre|h|blockquote|ul|ol|li|b|i|u|strong|em|sup|sub|span)/i.test(limpa);
+    return acc + (isSpecialTag ? "" : "<br>") + limpa;
+  }, "");
 }
 
-function renderConteudoComFlag(destino, texto, isHTML = null) {
-  if (isHTML === true) {
-    destino.innerHTML = texto;
-  } else if (isHTML === false) {
-    destino.innerHTML = escapeHTML(texto);
-  } else {
-    renderConteudoSeguro(destino, texto);
-  }
+function renderConteudoComFlag(destino, texto) {
+  // Sempre usamos formatarTexto para garantir suporte a imagens, códigos e limpeza de tags
+  destino.innerHTML = formatarTexto(texto);
 }

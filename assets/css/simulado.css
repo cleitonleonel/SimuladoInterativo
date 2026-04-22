@@ -9,9 +9,9 @@
 .questao-card {
     background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: 24px;
-    padding: 3rem;
-    margin-bottom: 2rem;
+    border-radius: 20px;
+    padding: 1.5rem; /* Reduzido de 3rem */
+    margin-bottom: 1.5rem;
     box-shadow: var(--shadow);
     animation: slideUp 0.4s ease-out;
     position: relative;
@@ -31,15 +31,79 @@
 
 .enunciado {
     font-family: 'Inter', sans-serif;
-    font-size: 1.25rem;
+    font-size: 1.15rem; /* Reduzido levemente de 1.25rem */
     font-weight: 500;
-    margin-bottom: 2rem;
+    margin-bottom: 1.25rem; /* Reduzido de 2rem */
     line-height: 1.5;
-    color: var(--text-main);
+}
+
+.enunciado p {
+    margin-bottom: 0.5rem; /* Espaço menor entre parágrafos do enunciado */
 }
 
 .dark-mode .enunciado {
     color: var(--dark-text-main);
+}
+
+/* Faz o primeiro parágrafo fluir na mesma linha que o número da questão */
+.enunciado p:first-of-type {
+    display: inline;
+}
+
+/* Garante que imagens e outros blocos voltem a quebrar linha normalmente */
+.enunciado img, 
+.enunciado pre,
+.enunciado .btn-anexo {
+    display: block;
+}
+
+/* Code Area Styling */
+pre {
+    background: #1e293b; /* Slate-800 */
+    color: #f1f5f9; /* Slate-100 */
+    padding: 0.85rem 1.25rem; /* Reduzido de 1.5rem */
+    border-radius: 12px;
+    margin: 0.75rem 0; /* Reduzido de 2rem */
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    overflow-x: auto;
+    text-align: left; /* Garante que o código não seja centralizado */
+    white-space: pre-wrap; /* Preserva indentação e quebra se necessário */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+code {
+    font-family: inherit;
+    color: inherit;
+}
+
+/* Attachment Button Styling */
+.btn-anexo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: 14px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin: 0.75rem 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-anexo:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.3);
+    filter: brightness(1.1);
+}
+
+.btn-anexo svg {
+    flex-shrink: 0;
 }
 
 .opcoes-container {
@@ -51,14 +115,15 @@
 .opcao {
     background: transparent;
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.25rem 1.5rem;
+    border-radius: 10px;
+    padding: 0.75rem 1.25rem; /* Reduzido de 1.25rem */
     cursor: pointer;
     transition: var(--transition);
     font-weight: 500;
     display: flex;
-    align-items: center;
-    gap: 1rem;
+    flex-direction: column; /* Garante que texto e código fiquem um embaixo do outro */
+    align-items: flex-start; /* Alinha tudo à esquerda */
+    gap: 0.5rem;
     text-align: left;
     color: var(--text-secondary);
 }

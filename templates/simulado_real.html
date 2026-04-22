@@ -51,6 +51,8 @@
           
           <label class="file-label" for="inputZip" style="background: var(--secondary);">Selecionar .zip</label>
           <input type="file" id="inputZip" accept=".zip" multiple>
+
+          <button id="btnIA" class="file-label" style="background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); border: none; cursor: pointer;">✨ Gerar com IA</button>
         </div>
       </div>
     </div>
@@ -93,27 +95,41 @@
   <div id="modalIA" class="modal">
     <div class="modal-content glass">
         <span class="close" id="fecharModalIA">&times;</span>
-        <h2 style="font-family: 'Outfit', sans-serif;">Gerar Questões com IA</h2>
-        <div class="input-field">
-            <label for="api_key">Gemini API Key</label>
-            <div style="display: flex; gap: 0.5rem;">
-                <input type="password" id="api_key" placeholder="Insira seu código de acesso">
-                <button id="toggleApiKey" style="background: none; border: 1px solid var(--border); border-radius: 8px; cursor: pointer;">👁️</button>
+        <div class="modal-header">
+            <div class="ai-icon-circle">✨</div>
+            <h2 style="font-family: 'Outfit', sans-serif;">Gerador de Questões Inteligente</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Crie simulados personalizados usando o poder da IA.</p>
+        </div>
+
+        <div class="modal-body">
+            <div class="input-field">
+                <label for="api_key">🔑 Sua Chave de Acesso</label>
+                <div class="api-key-container">
+                    <input type="password" id="api_key" placeholder="Insira seu código do Gemini">
+                    <button id="toggleApiKey" title="Mostrar/Ocultar">👁️</button>
+                </div>
+                <small style="opacity: 0.6; display: block; margin-top: 0.4rem;">Sua chave é processada localmente e nunca é salva em nossos servidores.</small>
+            </div>
+
+            <div class="input-field">
+                <label for="prompt">📚 Sobre o que deseja estudar?</label>
+                <textarea id="prompt" rows="3" placeholder="Ex: Programação Orientada a Objetos com Java, focando em Herança e Polimorfismo..."></textarea>
+            </div>
+
+            <div class="modal-footer">
+                <button onclick="enviarPrompt()" class="btn-ai-generate">
+                    <span>🚀 Iniciar Geração Mágica</span>
+                    <div class="shimmer"></div>
+                </button>
             </div>
         </div>
-        <div class="input-field">
-            <label for="prompt">Qual disciplina deseja estudar?</label>
-            <textarea id="prompt" rows="3" placeholder="Ex: Programação Orientada a Objetos com Java..."></textarea>
-        </div>
-        <div style="display: flex; justify-content: center; margin-top: 1.5rem;">
-            <button onclick="enviarPrompt()" class="btn-premium btn-primary" style="min-width: 240px; justify-content: center;">Gerar e Iniciar</button>
-        </div>
-        <div id="loading" style="display: none; margin-top: 1rem;">
+
+        <div id="loading" style="display: none;">
             <div class="tech-loader"></div>
-            <span>Consultando IA...</span>
+            <p>A IA está preparando seu desafio...</p>
         </div>
-        <div id="message"></div>
-        <div id="error-message"></div>
+        <div id="message" style="color: var(--success); text-align: center; margin-top: 1rem; font-weight: 600;"></div>
+        <div id="error-message" style="color: var(--error); text-align: center; margin-top: 1rem; font-weight: 600;"></div>
     </div>
   </div>
 
