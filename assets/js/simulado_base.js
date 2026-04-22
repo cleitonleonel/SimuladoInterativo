@@ -309,9 +309,8 @@ function mostrarResultadoReal(msg) {
             </div>
         </div>
 
-        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem;">
-            <button class="btn-premium btn-primary" onclick="window.location.reload()">🔁 Novo Simulado</button>
-            <button class="btn-premium" onclick="gerarPDF()">📄 Relatório PDF</button>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
+            <button class="btn-premium btn-primary" onclick="window.location.reload()" style="min-width: 240px;">🔁 Novo Simulado</button>
         </div>
       </div>
     `;
@@ -319,90 +318,6 @@ function mostrarResultadoReal(msg) {
     if (dotsContainer) dotsContainer.style.opacity = "0";
     const timerBadge = document.getElementById("floatingTimer");
     if (timerBadge) timerBadge.style.display = "none";
-}
-
-function gerarPDF() {
-    const isDark = document.body.classList.contains('dark-mode');
-    const porcentagem = Math.round(( (acertos || acertosTotal) / (questoes.length || totalQuestoes) ) * 100);
-    const date = new Date().toLocaleDateString('pt-BR');
-    
-    // Create a clean "Reporting" container
-    const report = document.createElement("div");
-    report.style.padding = "40px";
-    report.style.fontFamily = "'Inter', sans-serif";
-    report.style.color = "#000"; // Always dark for PDF printing
-    report.style.background = "#fff";
-
-    report.innerHTML = `
-        <div style="border-bottom: 2px solid #6366f1; padding-bottom: 20px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center;">
-            <div>
-                <h1 style="color: #6366f1; margin: 0; font-size: 24px;">Relatório de Desempenho</h1>
-                <p style="color: #666; margin: 5px 0 0 0;">Simulado Interativo</p>
-            </div>
-            <div style="text-align: right; color: #999; font-size: 12px;">
-                Data: ${date}
-            </div>
-        </div>
-
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 40px;">
-            <div style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center;">
-                <span style="font-size: 10px; color: #94a3b8; text-transform: uppercase;">Aproveitamento</span>
-                <div style="font-size: 24px; font-weight: 700; color: #6366f1;">${porcentagem}%</div>
-            </div>
-            <div style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center;">
-                <span style="font-size: 10px; color: #94a3b8; text-transform: uppercase;">Acertos Total</span>
-                <div style="font-size: 24px; font-weight: 700; color: #10b981;">${acertos || acertosTotal}</div>
-            </div>
-            <div style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; text-align: center;">
-                <span style="font-size: 10px; color: #94a3b8; text-transform: uppercase;">Questões Respondidas</span>
-                <div style="font-size: 24px; font-weight: 700;">${questoes.length || totalQuestoes}</div>
-            </div>
-        </div>
-
-        <h3 style="border-left: 4px solid #6366f1; padding-left: 10px; margin-bottom: 20px;">Detalhamento por Matéria</h3>
-        <table style="width: 100%; border-collapse: collapse; margin-bottom: 40px;">
-            <thead>
-                <tr style="background: #f1f5f9;">
-                    <th style="padding: 12px; text-align: left; border: 1px solid #e2e8f0; font-size: 12px;">Arquivo / Matéria</th>
-                    <th style="padding: 12px; text-align: center; border: 1px solid #e2e8f0; font-size: 12px;">Acertos</th>
-                    <th style="padding: 12px; text-align: center; border: 1px solid #e2e8f0; font-size: 12px;">Total</th>
-                    <th style="padding: 12px; text-align: right; border: 1px solid #e2e8f0; font-size: 12px;">%</th>
-                </tr>
-            </thead>
-            <tbody>
-                ${resultadosPorArquivo.map(r => `
-                    <tr>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0; font-size: 12px;">${r.nome}</td>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0; text-align: center; font-size: 12px;">${r.acertos}</td>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0; text-align: center; font-size: 12px;">${r.total}</td>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0; text-align: right; font-size: 12px; font-weight: bold;">${Math.round((r.acertos/r.total)*100)}%</td>
-                    </tr>
-                `).join('')}
-                ${(questoes.length && !resultadosPorArquivo.length) ? `
-                    <tr>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0; font-size: 12px;">Simulado Aleatório</td>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0; text-align: center; font-size: 12px;">${acertos}</td>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0; text-align: center; font-size: 12px;">${questoes.length}</td>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0; text-align: right; font-size: 12px; font-weight: bold;">${porcentagem}%</td>
-                    </tr>
-                ` : ''}
-            </tbody>
-        </table>
-
-        <div style="margin-top: 60px; border-top: 1px solid #eee; padding-top: 20px; font-size: 10px; color: #999; text-align: center;">
-            Este relatório foi gerado automaticamente pelo sistema Simulado Interativo.
-        </div>
-    `;
-
-	const opt = {
-		margin: 0.5,
-		filename: `relatorio_simulado_${new Date().toISOString().slice(0, 10)}.pdf`,
-		image: {type: 'jpeg', quality: 0.98},
-		html2canvas: {scale: 2, useCORS: true},
-		jsPDF: {unit: 'in', format: 'a4', orientation: 'portrait'}
-	};
-	
-	html2pdf().from(report).set(opt).save();
 }
 
 function shuffle_all(questions) {
@@ -489,9 +404,8 @@ function mostrarResultado() {
         </div>
 
         <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
-            <button class="btn-premium btn-primary" onclick="window.location.reload()">🔁 Novo Simulado</button>
-            <button class="btn-premium" onclick="gerarPDF()">📄 Relatório Profissional</button>
-            <button class="btn-premium" style="background: #25d366; color: white; border-color: #25d366;" onclick="compartilharWhatsApp()">📤 WhatsApp</button>
+            <button class="btn-premium btn-primary" onclick="window.location.reload()" style="min-width: 200px;">🔁 Novo Simulado</button>
+            <button class="btn-premium" style="background: #25d366; color: white; border-color: #25d366; min-width: 200px;" onclick="compartilharWhatsApp()">📤 WhatsApp</button>
         </div>
       </div>
     `;
